@@ -1,0 +1,16 @@
+.idea
+.idea/
+.settings
+.settings/
+build
+build/
+*.iml
+target
+target/
+*.class
+*.classpath
+*.project
+bin
+.metadata
+.metadata/
+.project
