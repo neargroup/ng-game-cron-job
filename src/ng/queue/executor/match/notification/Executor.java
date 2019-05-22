@@ -19,8 +19,8 @@ public class Executor {
 
 
     public static void main(String[] args) {
-        String ENDPOINT = "";
-        String QUEUE_NAME = "";
+        String ENDPOINT = "https://web.neargroup.me/ng/ChatConnectionReminder";
+        String QUEUE_NAME = "ng_match";
 
         new Thread(() -> {
             MessagesHandler<String> queueMessagesHandler = new QueueMessagesHandler(redisClient, httpClient,QUEUE_NAME, ENDPOINT);
