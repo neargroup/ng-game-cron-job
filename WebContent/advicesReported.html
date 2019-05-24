@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advices Reported</title>
+<meta charset="utf-8" />
+<meta name="theme-color" content="#ff3d8e" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="shortcut icon" type="image/png" href="images/icon.png" />
+<link rel="stylesheet"
+	href="//fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="css/styles.min.css">
+</head>
+<body>
+	<div class="modal-body">
+		<!-- Place at bottom of page -->
+	</div>
+	<div class="container maincontainer hidden">
+		<div id="storiesview" class="fullview">
+			<div class="story-section" id="f-story">
+				<div class="line"></div>
+			</div>
+			<div style="text-align: center; float: unset;">
+				<img src="" id="loadingnext" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/profile.min.js"></script>
+<script type="text/javascript">
+var r_t_c = 0;
+var limit = 0;
+var notload = 'null';
+
+$(function () {
+	$body = $("body");
+	$body.addClass("loading");
+	servlet(0);
+	$('.container').removeClass('hidden');
+});
+
+$(window).scroll(function () {
+    /* > -1*/
+    if ($(window).scrollTop() + $(window).height() > $(document).height() - 1 && notload == 'null') {
+        $('#loadingnext').attr('src', 'images/FhHRx.gif');
+        servlet(1);
+    }
+});
+
+function servlet(tid){
+	$.ajax({
+	    type: "POST",
+	    url: "advicesReported",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid":tid,
+	        "limit":limit
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	        $body.removeClass("loading");
+	        $('#loadingnext').attr('src', '');
+	        if (data.user_advices != '') {
+	        	limit+=20;
+	        	story(data);
+	        }else{
+	        	notload = 'notload';
+	        }
+	    }
+	});
+}
+
+function story(data) {
+    for (i in data.user_advices) {
+        var advice_text = data.user_advices[i].advices.advices_text;
+        var text = '';
+        if (data.user_advices[i].advices.hashtag == '#YouTube') {
+            var advice = (data.user_advices[i].advices.advices_text).split("$$$");
+            advice_text = advice[0];
+            for (j = 0; j < advice.length; j++) {
+                if (j != 0) {
+                    text += '$$$' + advice[j];
+                }
+            }
+        }
+        $('#f-story').append('<div class="stories" id="rev_top'
+                + r_t_c
+                + '"><input type="hidden" name="youtube'
+                + r_t_c
+                + '" id="youtube'
+                + r_t_c
+                + '"><div class="intend wrapword"><div class="date">'
+                + data.user_advices[i].advices.hashtag
+                + ' | '
+                + data.user_advices[i].advices.advices_time
+                + ' ago</div><div class="message" id="advices_text'
+                + r_t_c
+                + '" contenteditable="false">'
+                + advice_text
+                + '</div><div class="social-icons-small"><div class="tooltip" id="a_view'
+                + r_t_c
+                + '"><i class="material-icons">remove_red_eye</i><span>'
+                + data.user_advices[i].advices.advices_view
+                + '</span><span class="tooltiptext">View Count</span></div><div class="tooltip" id="a_wow'
+                + r_t_c
+                + '"><i class="material-icons">thumb_down</i><span>'
+                + data.user_advices[i].advices.advices_angry
+                + '</span><span class="tooltiptext">Like Count</span></div><span id="suspend'
+                + r_t_c
+                + '"><button class="followbutton" onclick="sendWarm(\''
+                + r_t_c
+                + '\',\''
+                + data.user_advices[i].advices.channelid
+                + '\', \''
+                + data.user_advices[i].advices.advices_id
+                + '\', \''
+                + advice_text.substring(0, 20)
+                + '...\');">Warning</button></span></div></div></div>');
+          r_t_c++;
+    }
+}
+
+function sendWarm(r_t_c, cid, aid, adv){
+	$.ajax({
+	    type: "POST",
+	    url: "advicesReported",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid" : 2,
+	        "cid" : cid,
+	        "aid" : aid,
+	        "adv" : adv
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	        if (data.warning=='send') {
+	        	$('#suspend'+r_t_c).html('');
+	        }else{
+	        }
+	    }
+	});
+}
+</script>

@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#ff3d8e" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="max-age=86400" />
+	<meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="shortcut icon" type="image/png" href="images/icon.png"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="css/styles.min.css">
+    <style>
+        body::-webkit-scrollbar-track {
+            /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+            background-color: #F5F5F5;
+            border-radius: 10px;
+        }
+
+        body::-webkit-scrollbar {
+            width: 6px;
+            background-color: #F5F5F5;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #eeeeee;
+        }
+
+        .fl {
+            color: #8f8f8f;
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #errormess {
+            padding-bottom: 0px;
+            margin-bottom: -15px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="modal-body">
+        <!-- Place at bottom of page -->
+    </div>
+    <div class="container maincontainer hidden">
+        <!--hidden-->
+        <div class="top-header" id="top-header">
+            <div class="user-box">
+                <img onerror="imgsrc('boy', 'profile', this);" style="height: 400px; width: 425px"
+                     class="avatar-profile hidden" id="avatar_profile_boy" align="middle" 
+                />
+                <img onerror="imgsrc('girl', 'profile', this);" style="height: 400px; width: 425px"
+                     class="avatar-profile" id="avatar_profile_girl" align="middle" />
+                <!-- <img
+                src="images/online.png" class="online-status" id="online-status" /> -->
+            </div>
+
+            <div class="rating-box hidden" id="rating-box">
+                <div class="star">
+                    <i class="material-icons">star_rate</i>
+                </div>
+                <div>
+                    <span class="rating" id="rating"></span> <span class="small-text" id="rate-user"></span>
+                </div>
+            </div>
+        </div>
+        <div class="namebox">
+            <div class="pull-left profile-name">
+                <div>
+                    <span class="name" id="prof-name"></span><span class="subname" id="sub-name"></span>
+                </div>
+                <!-- <div class="followers">
+                    <span>34 Followers</span>
+                </div> -->
+                <!--  
+                <div class="infofade">
+                    <span id="fb_veri"></span>
+                </div>
+                 -->
+                <div class="social-button">
+                    <button class="followbutton contactbutton" id="follow_user">Follow</button>
+                    <!-- <button data-toggle="modal" data-target="#myModalContact"
+                            id="buttonmodelcontact" class="followbutton contactbutton hidden" onclick="OpenMessageModal();">
+                        Contact
+                    </button> -->
+                </div>
+                <div class="social-icons hidden" id="social_icons">
+                    <!-- <div id="thumb-up-sec">
+                        <img src="images/thumb.png" />
+                        <i class="material-icons">thumb_up</i> <span id="thumb-up"></span>
+                    </div> -->
+                    <div id="wow-sec" class='hidden'>
+                        <!--<img src="images/heart.png" />-->
+                        <i class="material-icons">favorite</i> <span id="wow">0</span>
+                    </div>
+
+                    <div id="view-sec" class='hidden'>
+                        <i class="material-icons">remove_red_eye</i> <span id="view">0</span>
+                    </div>
+                    <div id="follow-sec" class='hidden'>
+                        <i class="material-icons">rss_feed</i> <span id="follow">0</span>
+                    </div>
+
+                    <!-- <div id="funny-sec">
+                        <img src="images/smiley.png" />
+                        <i class="material-icons">tag_faces</i> <span id="funny"></span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <span id="but-editprof">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fill-pink btn-floating"
+                    id="btn_editprofile">
+                <i class="material-icons">edit</i>
+            </button>
+        </span>
+        <div class="menulist">
+
+            <div class="tab-wrap">
+
+                <input type="radio" name="tabs" id="tab1" checked>
+                <div class="tab-label-content" id="tab1-content">
+                    <label for="tab1">
+                        <i class="material-icons active">person</i>
+                    </label>
+                    <div class="tab-content">
+                        <div id="profileview" class="fullview">
+
+
+                            <div class="intend">
+                                <div class="header">About</div>
+                                <ul class="infolist">
+                                    <!-- <li id="c_loc_sec"><span class="icon"> <i
+                                            class="material-icons">location_city</i> <img src="images/map.png" />
+                                    </span> <span class="detail"> <span class="head1">
+                                                Current Location </span> <span class="head2" id="c_loc"> </span>
+                                    </span></li> -->
+                                    <li id="c-cou-sec">
+                                        <span class="icon">
+                                            <i class="material-icons">place</i>
+                                        </span>
+                                        <span class="detail">
+                                            <span class="head1">
+                                                Current Country
+                                            </span>
+                                            <span class="head2" id="c-country">
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li id="age-sec">
+                                        <span class="icon">
+                                            <i class="material-icons">insert_invitation</i>
+                                        </span> <span class="detail">
+                                            <span class="head1"> Age </span>
+                                            <span class="head2" id="age"> </span>
+                                        </span>
+                                    </li>
+                                    <li id="age-range-sec">
+                                        <span class="icon">
+                                            <i class="material-icons">date_range</i>
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                Age
+                                                Range
+                                            </span> <span class="head2" id="age-range"> </span>
+                                        </span>
+                                    </li>
+                                    <li id="gender-sec">
+                                        <span class="icon" id="gender_icon">
+                                            <i class="material-icons">wc</i>
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                Gender
+                                            </span> <span class="head2" id="gender"> </span>
+                                        </span>
+                                    </li>
+                                    <li id="rel_status_sec">
+                                        <span class="icon">
+                                            <i class="material-icons">thumbs_up_down</i>
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                Relationship Status
+                                            </span> <span class="head2" id="rel_status">
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li id="match_gender_pref_sec">
+                                        <span class="icon" id="mgender_icon">
+                                            <i class="material-icons">wc</i>
+                                        </span> <span class="detail">
+                                            <span class="head1"> Interested in </span> <span class="head2" id="match_gender_pref">
+                                                Skip
+                                            </span>
+                                        </span>
+                                    </li>
+
+                                    <li id="want-ng-pref-sec">
+                                        <span class="icon"><i class="material-icons">flag</i></span>
+                                        <span class="detail">
+                                            <span class="head1"> Looking for </span> <span class="head2"
+                                                                                           id="want-ng-pref">Skip</span>
+                                        </span>
+                                    </li>
+
+                                    <li id="best-trait-pref-sec"><span class="icon"> <i class="material-icons">card_travel</i>
+                                    </span> <span class="detail"> <span class="head1"> Best trait </span> <span class="head2" id="best-trait-pref">
+                                                Skip </span>
+                                    </span></li>
+
+                                    <li id="date-trait-pref-sec"><span class="icon"> <i class="material-icons">timer</i>
+                                    </span> <span class="detail"> <span class="head1"> Preferred match trait </span> <span class="head2"
+                                            id="date-trait-pref"> Skip </span>
+                                    </span></li>
+                                    <li id="uni-sec">
+                                        <span class="icon">
+                                            <!--<i class="fa fa-building-o" aria-hidden="true"></i>-->
+                                            <i class="material-icons">school</i>
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                University
+                                            </span> <span class="head2" id="university"> </span>
+                                        </span>
+                                    </li>
+                                    <li id="work-sec">
+                                        <span class="icon">
+                                            <i class="material-icons">work</i>
+
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                Work
+                                            </span> <span class="head2" id="work"> </span>
+                                        </span>
+                                    </li>
+                                    <li id="fb-frnd-sec">
+                                        <span class="icon">
+                                            <i class="material-icons">people</i>
+
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                FB
+                                                Friends
+                                            </span> <span class="head2" id="fb-frnd"> </span>
+                                        </span>
+                                    </li>
+                                    <li id="join-date-sec">
+                                        <span class="icon">
+                                            <!--<i class="fa fa-calendar"></i>-->
+                                            <i class="material-icons">date_range</i>
+                                        </span> <span class="detail">
+                                            <span class="head1">
+                                                Joined on
+                                            </span> <span class="head2" id="join-date"> </span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="line"></div>
+                            <div class="secondary-section">
+                                <div class="intend hidden" id="empty-comm-interests">
+                                    <div class="header">Common Interests</div>
+                                    <!--uncomment if empty-->
+                                    <div class="empty">
+                                        <div>
+                                            <img src="images/empty.png" />
+                                        </div>
+                                        <div class="emptylabel">
+                                            Apologies, No Common Interests
+                                            yet..
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intend hidden" id="f-comm-interests">
+                                    <div class="header">Common Interests</div>
+                                    <div class="chips" id="comm-interests"></div>
+                                </div>
+                                <div class="intend hidden" id="empty-interests">
+                                    <div class="header">Interests</div>
+                                    <!--uncomment if empty-->
+                                    <div class="empty">
+                                        <div>
+                                            <img src="images/empty.png" />
+                                        </div>
+                                        <div class="emptylabel">Apologies, No Interests yet..</div>
+                                        <div class="emptylabel" id="con_fb_int" style="padding: 0; width: 100%; margin-top: -15px;">Connect with FB to add Interests</div>
+                                    </div>
+                                </div>
+                                <div class="intend hidden" id="f-interests">
+                                    <div class="header">Interests</div>
+
+                                    <div class="chips" id="interests"></div>
+
+                                </div>
+                               <div class="intend" id="fb_but" Style="text-align: center;">
+                               		<!-- <div class="fb-login-button" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div> -->
+                                   <button type="button" class="btn-outline fbprofbutton" style="font-family: 'Circular Std Book';" id="fb_login"><img src="images/fb.png" style="width: 18px; margin: 0 6px -5px -24px;">Continue with Facebook</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <input type="radio" name="tabs" id="tab2">
+                <div class="tab-label-content" id="tab2-content">
+                    <label for="tab2"> <i class="material-icons">settings</i>
+                    </label>
+                    <div class="tab-content">
+                        <div id="preferenceview" class="fullview">
+
+                            <div class="intend">
+                                <div class="header">PREFERENCES</div>
+                                <ul class="infolist">
+                                    <li id="match_gender_pref_sec"><span class="icon"> <i class="material-icons">wc</i>
+                                    </span> <span class="detail"> <span class="head1"> Interested in </span> <span class="head2" id="match_gender_pref">
+                                                Skip </span>
+                                    </span></li>
+
+                                    <li id="want-ng-pref-sec"><span class="icon"><i class="material-icons">flag</i></span>
+                                        <span class="detail"> <span class="head1"> Looking for </span> <span class="head2"
+                                            id="want-ng-pref"> Skip </span>
+                                    </span></li>
+
+                                    <li id="best-trait-pref-sec"><span class="icon"> <i class="material-icons">card_travel</i>
+                                    </span> <span class="detail"> <span class="head1"> Your
+                                                best trait </span> <span class="head2" id="best-trait-pref">
+                                                Skip </span>
+                                    </span></li>
+
+                                    <li id="date-trait-pref-sec"><span class="icon"> <i class="material-icons">timer</i>
+                                    </span> <span class="detail"> <span class="head1"> Preferred match trait </span> <span class="head2"
+                                            id="date-trait-pref"> Skip </span>
+                                    </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <input type="radio" name="tabs" id="tab4">
+                <div class="tab-label-content" id="tab4-content">
+                    <label for="tab4"><i class="material-icons">assignment</i></label>
+                    <div class="tab-content">
+                        <div id="storiesview" class="fullview">
+
+                            <div class="intend">
+                                <div class="header" id="story_header">POSTS BY ME</div>
+                                <!--uncomment if empty-->
+                                <div class="empty" id="empty-story">
+                                    <div>
+                                        <img src="images/empty.png" />
+                                    </div>
+                                    <div class="emptylabel">Apologies, No Posts yet..</div>
+                                </div>
+                            </div>
+                            <div class="story-section" id="f-story">
+                                <div class="line"></div>
+
+                            </div>
+                            <div style="text-align: center; float: unset;">
+                                <img src="" id="loadingnext" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="radio" name="tabs" id="tab3">
+                <!--  
+                <div class="tab-label-content" id="tab3-content">
+                    <label for="tab3">
+                        <i class="material-icons">comment</i>
+                    </label>
+                    <div class="tab-content ">
+                        
+                        <div id="reviewsview" class="fullview">
+
+                            <div class="intend">
+                                <div class="header">Reviews</div>
+                                
+                                <div class="empty" id="empty-reviews">
+                                    <div>
+                                        <img src="images/empty.png" />
+                                    </div>
+                                    <div class="emptylabel">Apologies, No Reviews yet..</div>
+                                </div>
+                            </div>
+                            <div class="review-section" id="f-reviews"></div>
+                        </div>
+                    </div>
+                </div>
+				 -->
+
+
+                <div class="slide" id="slide"></div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container deactivate_container hidden">
+        <div class="controls">
+            <div class="questions">
+                <div class="question">
+                    <label class="head">Your account currently deactivated</label>
+                   <button class="btn-outline" id="btnactivate" onClick="activateAccount()" >Activate Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toast-message" class="mdl-js-snackbar mdl-snackbar" style="width: 100%;">
+        <!--<div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>-->
+    </div>
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg hidden"
+            data-toggle="modal" data-target="#myModal" id="buttonmodel">
+        Open
+        Modal
+    </button>
+    <div class="lean-overlay" id="overlayContact"></div>
+    <!-- Modal -->
+    <div id="myModalContact" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseContactModal();"><i class="material-icons">close</i></button>
+                    <h4 class="modal-title" id="model_title">Send Message</h4>
+                    <h6 class="modal-title modal-text hidden" id="errormess"></h6>
+                    <h6 class="modal-title modal-text" id="model_t_text"><textarea rows="4" cols="25" id="contacttextarea" autofocus></textarea></h6>
+                    <button type="button" class="btn btn-default followbutton"
+                            id="contact_user">
+                        SEND
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="CloseModal();"><i class="material-icons">close</i></button>
+                    <h4 class="modal-title" id="model_title_text"></h4>
+                    <h6 class="modal-title modal-text" id="model_t_text"></h6>
+                    <button type="button" class="btn btn-default followbutton" id="btnok">
+                        OK
+                    </button>
+                    <button type="button" class="btn btn-default followbutton" id="btncancel">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
+<script src="js/profile.min.js"></script>
+<script src="js/fblogin.min.js"></script>
+<script type="text/javascript">
+$(".tab-label-content").on("click", function () {
+    $(".tab-label-content").find("label>i").removeClass("active");
+    $(this).find("label>i").addClass("active");
+
+});
+
+function OpenMessageModal() {
+    $("#overlayContact").show();
+    $("#myModalContact").css({ "top": "-200px", "display": "block" });
+    $("#myModalContact").animate({ "top": "35px" }, "100");
+}
+function CloseContactModal() {
+    $("#overlayContact").hide();
+    $("#myModalContact").hide();
+}
+
+var blurimage = '';
+var channelid = '';
+var favs = getUrlParameter("kJhuW");
+var topics = getUrlParameter("hYFyh");
+var gender = '';
+var firstname = '';
+var name = '';
+var age_range = '';
+var follow_link1 = '';
+var follow_link2 = '';
+var userAuth2 = '';
+$(function () {
+    $body = $("body");
+    $body.addClass("loading");
+    
+  	//save logs
+  	try {
+  		console.log("PWAlogs pagename ", window.location.pathname.split("/")[1])
+  	    $.ajax({
+  	        type: "POST",
+  	        url: "PWAlogs",
+  	        //crossDomain: true,
+  	        dataType: 'json',
+  	        data: JSON.stringify({
+  	            "auth": getUrlParameter("channelid"),
+  	            "auth2": getUrlParameter("channelid2"),
+  	            "pagename": "myprofile"
+  	        }),
+  	        cache: false,
+  	        contentType: 'application/json',
+  	        mimeType: 'application/json',
+  	        success: function (data) {
+  	            console.log('logs done.')
+  	        }
+  	    })	
+  	} catch(e) {
+  		console.log("PWALOGS myprofile error ", e)
+  	}
+    
+    $.ajax({
+        type: "POST",
+        url: "userProfile",
+        //crossDomain: true,
+        dataType: 'json',
+        data: JSON.stringify({
+            "channelid": getUrlParameter("channelid"),
+            "hYFyh": topics,
+            "channelid2": getUrlParameter("channelid2"),
+            "kJhuW": favs,
+            "abhinay": getUrlParameter("abhinay")
+        }),
+        cache: false,
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        success: function (data) {
+            $body.removeClass("loading");
+            	if("userAuth2" in data && data.userAuth2 != '' && data.userAuth2 != undefined) {
+            		userAuth2 = data.userAuth2
+            		console.log("ser userAuth2 on edit in profile ", data.userAuth2);
+            		$("#btn_editprofile").data('userAuth2 ', data.userAuth2);
+            	}
+                if ("user_details" in data) {
+                    $('.maincontainer').removeClass('hidden');
+                    $('.deactivate_container').html('');
+                    blurimage = data.user_details.blurimage;
+                    channelid = data.user_details.channelid;
+                    gender = data.user_details.gender;
+                    firstname = data.user_details.firstname;
+                    name = data.user_details.name;
+                    if (gender.toLowerCase() == 'male') {
+                        $('#top-header').addClass('top-header-colorchange');
+                        $('#rating-box').addClass('rating-box-colorchange');
+                        $('#sub-name').addClass('subname-colorchange');
+                        $('#btn_editprofile').addClass('fill-blue');
+                        $('#tab1-content').addClass('tab-label-content-colorchange');
+                        $('#slide').addClass('slide-colorchange');
+                        $('.header').addClass('header-colorchange');
+                        $('.followbutton').addClass('followbutton-colorchange');
+                        $('meta[name=theme-color]').attr("content", "#1B9AF3");
+                        $('#avatar_profile_boy').removeClass('hidden');
+                        $('#avatar_profile_girl').addClass('hidden');
+                        $('#gender_icon').html('<i class="material-icons male">wc</i>');
+                        if (favs !== undefined || blurimage == 2) {
+                            $('#avatar_profile_boy').attr("src", "https://s3-us-west-2.amazonaws.com/ng-image/ng/profile/profile_" + data.user_details.image_name); //https://img.neargroup.in/project/430x400/forcesize/profile_
+                        } else {
+                            $('#avatar_profile_boy').attr("src", "https://s3-us-west-2.amazonaws.com/ng-image/ng/profile/profile_" + data.user_details.image_name); //https://img.neargroup.in/project/430x400/forcesize/pixelate_13/profile_
+                        }
+                        $('#tab1-content').click(function () {
+                        	console.log("TAB1-CONTENT click")
+                            $('#tab1-content').addClass('tab-label-content-colorchange');
+                            $('#tab3-content').removeClass('tab-label-content-colorchange');
+                            $('#tab4-content').removeClass('tab-label-content-colorchange');
+                        });
+                        $('#tab3-content').click(function () {
+                            $('#tab1-content').removeClass('tab-label-content-colorchange');
+                            $('#tab3-content').addClass('tab-label-content-colorchange');
+                            $('#tab4-content').removeClass('tab-label-content-colorchange');
+                        });
+                        $('#tab4-content').click(function () {
+                        	console.log("TAB4-CONTENT click")
+                            $('#tab1-content').removeClass('tab-label-content-colorchange');
+                            $('#tab3-content').removeClass('tab-label-content-colorchange');
+                            $('#tab4-content').addClass('tab-label-content-colorchange');
+                            
+                            
+                        });
+                    } else {
+                        $('#gender_icon').html('<i class="material-icons female">wc</i>');
+                        if (favs !== undefined || blurimage == 2) {
+                            $('#avatar_profile_girl').attr("src", "https://s3-us-west-2.amazonaws.com/ng-image/ng/profile/profile_" + data.user_details.image_name); //https://img.neargroup.in/project/430x400/forcesize/profile_
+                        } else {
+                            $('#avatar_profile_girl').attr("src", "https://s3-us-west-2.amazonaws.com/ng-image/ng/profile/profile_" + data.user_details.image_name); //https://img.neargroup.in/project/430x400/forcesize/pixelate_13/profile_
+                        }
+                    }
+                    var hash = location.hash.slice(1);
+                    console.log("hash == ", hash);
+                    
+                    
+                    if (favs !== undefined || topics !== undefined) {
+                        if (getUrlParameter("channelid2") !== undefined) {
+                            $('#buttonmodelcontact').removeClass('hidden');
+                        }
+                        $('#but-editprof').html('');
+                        $('#story_header').html("POSTS BY USERS");
+                    } else {
+                        $('.social-button').addClass('social-button-center');
+                        $('.contactbutton').addClass('contactbutton-center');
+                    }
+                    if ("user_follow_but" in data && data.user_follow_but != 0) {
+                        if ($('#follow_user').hasClass('followbutton-colorchange')) {
+                            $('#follow_user').html('Following').addClass('followingbutton-colorchange');
+                        } else {
+                            $('#follow_user').html('Following').addClass('followingbutton');
+                        }
+                    }
+                    if ("followlink_fb" in data && data.followlink_fb != '') {
+                        follow_link1 = data.followlink_fb;
+                        $('#fb_veri').append('<a href="https://www.' + follow_link1 + '" class="fl">www.' + follow_link1 + '</a>');
+                        if (gender.toLowerCase() == 'male') {
+                            $('#fb_veri').children().addClass('subname-colorchange infofade-url');
+                        } else {
+                            $('#fb_veri').children().addClass('subname infofade-url');
+                        }
+                    }
+                    if ("twitter_isDeactivate" in data && data.twitter_isDeactivate!='1' && data.followlink_twit!='') {
+                        follow_link2 = 'twitter.com/'+data.followlink_twitter;
+                        $('#fb_veri').append('<a href="https://www.' + follow_link2 + '" class="fl">www.' + follow_link2 + '</a>');
+                        if (gender.toLowerCase() == 'male') {
+                            $('#fb_veri').children().addClass('subname-colorchange infofade-url');
+                        } else {
+                            $('#fb_veri').children().addClass('subname infofade-url');
+                        }
+                    }
+
+                    if (favs === undefined && blurimage != 2 && data.followlink_fb == ''&& data.followlink_twit=='') {
+                        $('#fb_veri').append("Image Blurred ");
+                    }
+
+                    $('#rating').html(data.user_rate.rate + " / 5 Ratings");
+                    $('#rate-user').html("Rated by " + data.user_rate.rate_user + " users");
+                    if (firstname == "2") {
+                        $('#sub-name').html('@ ' + name);
+                    } else {
+                        $('#prof-name').html(name);
+                    }
+                    if (data.user_wow != 0 || data.user_view != 0 || data.user_follow != 0) {
+                        $('#social_icons').removeClass('hidden');
+                        /* if(data.user_likes!=0){$('#thumb-up').html(data.user_likes);}else{$('#thumb-up-sec').html("");$('#thumb-up-sec').addClass("hidden");} */
+                        if (data.user_wow != 0) { $('#wow-sec').removeClass('hidden'); $('#wow').html(data.user_wow); }
+                        if (data.user_view != 0) { $('#view-sec').removeClass('hidden'); $('#view').html(data.user_view); }
+                        if (data.user_follow != 0) { $('#follow-sec').removeClass('hidden'); $('#follow').html(data.user_follow); }
+                        /* if(data.user_funny!=0){$('#funny').html(data.user_funny);}else{$('#funny-sec').html("");$('#funny-sec').addClass("hidden");} */
+                    } else {
+
+                    }
+                    if ("curr_city" in data.user_details && data.user_details.curr_city!==undefined && (data.user_details.curr_city).toLowerCase!='null') { $('#c-country').html(data.user_details.curr_city);$('#c-cou-sec').children('.detail').children('.head1').html('Current City'); } else { $('#c-country').html(data.user_details.curr_country); }
+                    if ("gender" in data.user_details) { $('#gender').html(gender); } else { $('#gender-sec').addClass('hidden'); }
+                    if ("joined_on" in data.user_details) { $('#join-date').html(data.user_details.joined_on); } else { $('#join-date-sec').addClass('hidden'); }
+                    if ("user_pre" in data) {
+                        age_range = data.user_pre.age_range;
+                        if ((data.user_pre.match_gender).toLowerCase() == 'male') {
+                            $('#mgender_icon').html('<i class="material-icons male">wc</i>');
+                        } else {
+                            $('#mgender_icon').html('<i class="material-icons female">wc</i>');
+                        }
+                        if ("rstatus" in data.user_pre && data.user_pre.rstatus != 'Skip') { $('#rel_status').html(data.user_pre.rstatus); } else { $('#rel_status_sec').addClass('hidden'); }
+                        if ("age" in data.user_pre && data.user_pre.age != 0) {
+                            $('#age').html(data.user_pre.age);
+                            $('#age-range-sec').addClass('hidden');
+                        } else {
+                            $('#age-sec').addClass('hidden');
+                            if ("age_range" in data.user_pre) { $('#age-range').html(age_range); } else { $('#age-range-sec').addClass('hidden'); }
+                        }
+                        if ("match_gender" in data.user_pre) { $('#match_gender_pref').html(data.user_pre.match_gender); } else { $('#match_gender_pref_sec').addClass('hidden'); }
+						if("best_trait" in data.user_pre && data.user_pre.best_trait!='Skip'){$('#best-trait-pref').html(data.user_pre.best_trait);}else{$('#best-trait-pref-sec').addClass('hidden');}
+						if("date_trait" in data.user_pre && data.user_pre.date_trait!='Skip'){$('#date-trait-pref').html(data.user_pre.date_trait);}else{$('#date-trait-pref-sec').addClass('hidden');}
+                        if ("want_ng" in data.user_pre && data.user_pre.want_ng != 'Skip') { $('#want-ng-pref').html(data.user_pre.want_ng); } else { $('#want-ng-pref-sec').addClass('hidden'); }
+                    } else {
+                        $('#rel_status_sec').addClass('hidden');
+                        $('#age-sec').addClass('hidden');
+                        $('#age-range-sec').addClass('hidden');
+                        $('#match_gender_pref_sec').addClass('hidden');
+                        $('#best-trait-pref-sec').addClass('hidden');
+                        $('#date-trait-pref-sec').addClass('hidden');
+                        $('#want-ng-pref-sec').addClass('hidden');
+                    }
+                    if (("user_reg" in data) && (data.user_reg.fb_isDeactivate) == "0") {
+                        if (follow_link1 == '' && follow_link2 == '') {
+                            $('#fb_veri').append("(FB verified)");
+                        }
+                        $('#con_fb_int').html('');
+                        if (favs !== undefined || topics !== undefined) {
+                            $('#fb_but').html('');
+                        }
+                        if (favs === undefined && topics === undefined) {
+                            $('#fb_but').html('<button type="button" class="btn-outline fbprofbutton" onclick="removefb()" style="font-family: \'Circular Std Book\';"><img src="images/fb.png" style="width: 18px; margin: 0 6px -5px -24px;">Log Out</button>');
+                        }
+                        if (favs !== undefined) {
+                            if ("education" in data.user_reg) { $('#university').html(data.user_reg.education); } else { $('#uni-sec').addClass('hidden'); }
+                            if ("work" in data.user_reg) { $('#work').html(data.user_reg.work); } else { $('#work-sec').addClass('hidden'); }
+                        } else {
+                            $('#university').html("XXXXX");
+                            $('#university').addClass("blur");
+                            $('#work').html("XXXXX");
+                            $('#work').addClass("blur");
+                        }
+                        if ("fb_frnd_count" in data.user_reg) { $('#fb-frnd').html(data.user_reg.fb_frnd_count); } else { $('#fb-frnd-sec').addClass('hidden'); }
+                        if (("common_interest" in data.user_reg) && (data.user_reg.common_interest).length > 0) {
+                            $('#empty-comm-interests').html("");
+                            $('#f-comm-interests').removeClass('hidden');
+                            for (i in data.user_reg.common_interest) {
+                                $('#comm-interests').append('<span class="mdl-chip"><span class="mdl-chip__text">'
+                                    + data.user_reg.common_interest[i]
+                                    + '</span></span>');
+                            }
+                        } else {
+                            $('#f-comm-interests').html("");
+                            $('#empty-comm-interests').html('');
+                        }
+                        if (("interest" in data.user_reg) && (data.user_reg.interest).length > 0) {
+                            $('#empty-interests').html("");
+                            $('#f-interests').removeClass('hidden');
+                            for (i in data.user_reg.interest) {
+                                $('#interests').append('<span class="mdl-chip"><span class="mdl-chip__text">'
+                                    + data.user_reg.interest[i]
+                                    + '</span></span>');
+                            }
+                        } else {
+                            $('#f-interests').html("");
+                            if (favs !== undefined || topics !== undefined) {
+                                $('#empty-comm-interests').addClass('hidden');
+                                $('#empty-interests').addClass('hidden');
+                            }
+                        }
+                    } else {
+                        $('#online-status').addClass('hidden');
+                        $('#f-interests').addClass('hidden');
+                        $('#empty-interests').removeClass('hidden');
+                        $('#uni-sec').addClass('hidden');
+                        $('#work-sec').addClass('hidden');
+                        $('#fb-frnd-sec').addClass('hidden');
+                        $('#f-comm-interests').html("");
+                        if (favs !== undefined || topics !== undefined) {
+                            $('#empty-comm-interests').addClass('hidden');
+                            $('#empty-interests').addClass('hidden');
+                            $('#fb_but').html('');
+                        }
+                    }
+                    var rev_top_count = 0;
+                    if ((data.user_reviews).length > 0) {
+                        $('#empty-reviews').addClass('hidden');
+                        $('#f-reviews').removeClass('hidden');
+                        for (i in data.user_reviews) {
+                        	var review_text1='';
+                        	if("reviews_text1" in data.user_reviews[i] && data.user_reviews[i].reviews_text1!='' && data.user_reviews[i].reviews_text1!==undefined){
+                        		review_text1='<br><br>'+ data.user_reviews[i].reviews_text1;
+                        	}
+                            $('#f-reviews').append('<div class="reviews" id="rev_top'
+                                + rev_top_count
+                                + '"><div class="intend"><span class="del" id="del_rev_top'
+                                + rev_top_count
+                                + '"><button class="mdl-button mdl-js-button mdl-button--icon delete" onclick=\'removeTopicFunction('
+                                + rev_top_count
+                                + ', "'
+                                + data.user_reviews[i].reviews_id
+                                + '", "testimonial", "Remove review", "Do you want to remove this review?")\'><i class="material-icons">delete_forever</i></button></span><div class="date">'
+                                + data.user_reviews[i].reviews_time
+                                + '</div><div class="message">'
+                                + data.user_reviews[i].reviews_text
+                                + review_text1
+                                + '</div><div class="name" id="review_name'
+                                + i
+                                + '">- '
+                                + data.user_reviews[i].reviews_name
+                                + '</div><div class="reviewrating" id="reviewrating'
+                                + rev_top_count
+                                + '"><i class="material-icons">star_rate</i>'
+                                + data.user_reviews[i].rate
+                                + ' / 5 Ratings</div></div></div>');
+                            if (data.user_reviews[i].reviews_name === undefined || data.user_reviews[i].reviews_name == "") { $('#review_name' + i).html(""); }
+                            if (data.user_reviews[i].rate < 3) { $('#reviewrating' + rev_top_count).html(''); }
+                            if (favs !== undefined || topics !== undefined) {
+                                $('#del_rev_top' + rev_top_count).html("");
+                            }
+                            rev_top_count++;
+                        }
+                    } else {
+                        $('#f-reviews').addClass('hidden');
+                        $('#empty-reviews').removeClass('hidden');
+                    }
+                    
+                    
+                    if ((data.user_advices).length > 0 || hash == 'tab4-content') {
+                    	// && hash == 'tab4-content'
+                    	console.log("show stories if stories present ", hash);
+                        $('#tab1-content').children().children().removeClass('active');
+                        $('#tab4-content').click().children().children().addClass('active');
+                        $('#tab4').prop('checked', true);
+                        $('#empty-story').addClass('hidden');
+                        $('#f-story').removeClass('hidden');
+                        story(data, rev_top_count);
+                    } else {
+                        $('#f-story').addClass('hidden');
+                        $('#empty-story').removeClass('hidden');
+                    }
+                    if(hash == 'tab1-content') {
+                    	console.log("HASH TAB1-CONTENT ");
+                    	$('#tab4-content').children().children().removeClass('active');
+                    	$('#tab1-content').click();
+                        $('#tab1').prop('checked', true);
+                    	//$('#tab1-content').children().children().removeClass('active');
+                        //$('#tab4-content').children().children().addClass('active');
+                        //$('#tab4').prop('checked', true);
+                        
+                        //$('#empty-story').addClass('hidden');
+                        //$('#f-story').removeClass('hidden');
+                        //story(data, rev_top_count);
+                    }
+                    
+                } else if ("deactivate" in data) {
+                    if (favs !== undefined || topics !== undefined) {
+                        $('.deactivate_container').removeClass('hidden').children().children().children().html('<label class="head">This user is currently inactivate.</label>');
+                        $('.maincontainer').html('');
+                    } else {
+                        $('.deactivate_container').removeClass('hidden');
+                        $('.maincontainer').html('');
+                    }
+                } else if ("Grant_Access" in data) {
+                    if (data.Grant_Access === false) {
+                        window.location.replace("bot2.html");
+                    }
+                } else {
+
+                }
+        }
+    });
+});
+
+$("#btn_editprofile").click(function () {
+    console.log("userAuth2 ", userAuth2)
+    var params = (new URL(document.location)).searchParams;
+    console.log("url params= ", params);
+    var userAuth1 = params.get("channelid");
+    console.log("userAuth1 params= ", userAuth1);
+    if(userAuth1 != '')
+        window.location.href = 'https://redirect.neargroup.me/settings?authId=' + encodeURIComponent(userAuth1);
+
+//        'editprofile.html?channelid=' + encodeURIComponent(getUrlParameter("channelid"));
+});
+
+var topiccount = '';
+function story(data, r_t_c) {
+    var gen = '';
+    if ((gender).toLowerCase() == 'male') {
+        gen = 'Boy';
+    } else {
+        gen = 'Girl';
+    }
+    for (i in data.user_advices) {
+        var advice_text = data.user_advices[i].advices.advices_text;
+        var youtube_text = '';
+        var WritingContest_ht='';
+        if (data.user_advices[i].advices.hashtag == '#YouTube') {
+            var advice = (data.user_advices[i].advices.advices_text).split("$$$");
+            advice_text = advice[0];
+            for (j = 0; j < advice.length; j++) {
+                if (j != 0) {
+                	youtube_text += '$$$' + advice[j];
+                }
+            }
+        }else if (data.user_advices[i].advices.hashtag == '#WritingContest') {
+        	WritingContest_ht='#WritingContest';
+        }else{
+        	youtube_text = '';
+        	WritingContest_ht='';
+        }
+        $('#f-story').append('<div class="stories" id="rev_top'
+            + r_t_c
+            + '"><input type="hidden" name="youtube'
+            + r_t_c
+            + '" id="youtube'
+            + r_t_c
+            + '"><input type="hidden" name="writingcontest'
+            + r_t_c
+            + '" id="writingcontest'
+            + r_t_c
+            + '"><div class="intend wrapword"><span class="del" id="del_rev_top'
+            + r_t_c
+            + '"><button class="mdl-button mdl-js-button mdl-button--icon edit" onclick=\'editTopicFunction('
+            + r_t_c
+            + ', "'
+            + data.user_advices[i].advices.advices_id
+            + '", "'
+            + data.user_advices[i].advices.tname
+            + '")\'><i class="material-icons">border_color</i></button><button class="mdl-button mdl-js-button mdl-button--icon delete" onclick=\'removeTopicFunction('
+            + r_t_c
+            + ', "'
+            + data.user_advices[i].advices.advices_id
+            + '", "'
+            + data.user_advices[i].advices.tname
+            + '", "Remove post", "Do you want to remove this post?")\'><i class="material-icons">delete_forever</i></button></span><div class="date">'
+            + data.user_advices[i].advices.hashtag
+            + ' | '
+            + gen
+            + ' '
+            + age_range
+            + ' | '
+            + data.user_advices[i].advices.advices_time
+            + '</div><div class="message" id="advices_text'
+            + r_t_c
+            + '">'
+            + advice_text
+            + '</div><div class="name" id="ung_top'
+            + r_t_c
+            + '">- '
+            + name
+            + '<a href="https://www.' + follow_link1 + '" class="fl">' + follow_link1 + '</a>'
+            + '<a href="https://www.' + follow_link2 + '" class="fl">' + follow_link2 + '</a></div>'
+            + '<div class="social-icons-small"><div class="tooltip" id="a_view'
+            + r_t_c
+            + '"><i class="material-icons">remove_red_eye</i><span>'
+            + data.user_advices[i].advices.advices_view
+            + '</span><span class="tooltiptext">View Count</span></div><div class="tooltip" id="a_wow'
+            + r_t_c
+            + '"><i class="material-icons">favorite</i><span>'
+            + data.user_advices[i].advices.advices_wow
+            + '</span><span class="tooltiptext">Like Count</span></div><div class="tooltip" id="a_chat'
+            + r_t_c
+            + '"><i class="material-icons">forum</i><span>'
+            + data.user_advices[i].advices.advices_tchatcount
+            + '</span><span class="tooltiptext">Chat Request Count</span></div></div></div></div>');
+        /* if(data.user_advices[i].advices.advices_likes==0)$('#a_likes'+i).html(""); */
+        if (data.user_advices[i].advices.advices_wow == 0) $('#a_wow' + r_t_c).html("");
+        if (data.user_advices[i].advices.advices_tchatcount == 0) $('#a_chat' + r_t_c).html("");
+        /* if(data.user_advices[i].advices.advices_funny==0)$('#a_funny'+i).html(""); */
+        if (data.user_advices[i].advices.advices_view == 0) $('#a_view' + r_t_c).html("");
+        if (favs !== undefined || topics !== undefined || data.user_advices[i].advices.hashtag == '#SelfieDare') {
+            $('#del_rev_top' + r_t_c).html("");
+        }
+        $('#youtube'+r_t_c).val(youtube_text);
+        $('#writingcontest'+r_t_c).val(WritingContest_ht);
+        r_t_c++;
+    }
+    topiccount = r_t_c;
+}
+var limit = 15;
+var notload = 'null';
+var notpageload = 'null';
+$(window).scroll(function () {
+    /* > -1*/
+    if ($(window).scrollTop() + $(window).height() > $(document).height() - 1 && notload == 'null' && $('#tab4').is(':checked') && notpageload=='null') {
+    	notpageload='abhinay';
+        $('#loadingnext').attr('src', 'images/FhHRx.gif');
+        $.ajax({
+            type: "POST",
+            url: "userProfile",
+            //crossDomain: true,
+            dataType: 'json',
+            data: JSON.stringify({
+                "tid": 4,
+                "channelid": getUrlParameter("channelid"),
+                "hYFyh": topics,
+                "channelid2": getUrlParameter("channelid2"),
+                "kJhuW": favs,
+                "abhinay": getUrlParameter("abhinay"),
+                "limit": limit
+            }),
+            cache: false,
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            success: function (data) {
+                $('#loadingnext').attr('src', '');
+                if (data.user_advices != '') {
+                	notpageload = 'null';
+                    story(data, topiccount);
+                } else {
+                    notload = 'notload';
+                }
+            }
+        });
+        limit = limit + 15;
+    }
+});
+</script>

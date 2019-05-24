@@ -15,25 +15,22 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class QueueMessagesHandler implements MessagesHandler<String>{
-    private static final String DB_URL = "jdbc:mariadb://m1.c40vtcybbb0p.us-west-2.rds.amazonaws.com:1893/ng";
+    private static final String DB_URL = "jdbc:mysql://m1.c40vtcybbb0p.us-west-2.rds.amazonaws.com:1893/ng";
     private static final String DB_USER = "iuwesas";
     private static final String DB_PASSWORD = "jnsk(bnji&ji^frbn";
 
-    private static Connection connection = null;
     private final RedissonClient redisClient;
     private final String CHAT_COUNT = "CHAT_COUNT";
     private final String QUERY_PREFIX = "SELECT channelId1, channelId2 FROM UserMatchHistory where matchID=";
     private final String MATCH = "MATCH_";
 
     private AsyncHttpClient httpClient;
-    private String queueName;
     private String endpoint;
 
     public QueueMessagesHandler(RedissonClient redisClient,
-                                AsyncHttpClient httpClient,
-                                String queueName, String endpoint) {
+                                AsyncHttpClient httpClient
+                               , String endpoint) {
         this.redisClient = redisClient;
-        this.queueName = queueName;
         this.httpClient = httpClient;
         this.endpoint = endpoint;
     }
@@ -64,27 +61,20 @@ public class QueueMessagesHandler implements MessagesHandler<String>{
         return result;
     }
 
-    public String getQueueName() {
-        return this.queueName;
-    }
 
     public String process(String message) {
 
         String[] matchIds = message.split("_");
         Interval currentStage = Interval.BOOTSTRAP;
-        Interval updatedStage = Interval.SEV;
 
         if (matchIds.length == 2) {
             currentStage = Interval.valueOf(matchIds[1].toUpperCase());
         }
 
-        if (currentStage != Interval.SEV) {
-            updatedStage = Interval.values()[currentStage.ordinal() + 1];
-        }
 
         try {
             boolean yes = isUserChatting(matchIds[0]);
-            long diffInMinutes = updatedStage.getDuration() - currentStage.getDuration();
+            System.out.println("yes : "+ yes);
 
             if (yes) {
                 long lastConversationTimestamp = 0;
@@ -93,35 +83,35 @@ public class QueueMessagesHandler implements MessagesHandler<String>{
                     lastConversationTimestamp = redisClient.getAtomicLong(MATCH + matchIds[0]).get();
                 } catch (NumberFormatException ignored) {
                 }
+                
+                System.out.println("lastConversationTimestamp : "+lastConversationTimestamp);
 
                 long threshold = System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(currentStage.getThreshold());
 
+                System.out.println("threshold : "+threshold);
                 if (lastConversationTimestamp < threshold) {
                     String body = doesUserConverseEnough(currentStage, matchIds[0]) ? "yes" : "noo";
 
                     body = matchIds[0] + "_" + currentStage.toString() + "_" + body;
+                    
+                    System.out.println("body : "+body);
                     httpClient.preparePost(this.endpoint)
                             .setBody(body)
                             .execute(new CustomAsyncHandler());
 
-                    if (currentStage == Interval.SEV) {
-                        redisClient.getAtomicLong(MATCH + matchIds[0]).delete();
-                    }
 
                     Thread.sleep(100);
                 }
 
-                if (diffInMinutes > 0) {
-                    this.redisClient.getDelayedQueue(redisClient.getQueue(this.queueName))
-                            .offerAsync(matchIds[0] + "_" + updatedStage.toString(), diffInMinutes, TimeUnit.MINUTES);
-                }
             } else {
+            	System.out.println("else no");
                 redisClient.getAtomicLong(MATCH + matchIds[0]).delete();
             }
         } catch (NullPointerException | InterruptedException e) {
             System.exit(0);
         }
 
+        System.out.println("Message : "+message);
         return message;
     }
 
@@ -154,4 +144,10 @@ public class QueueMessagesHandler implements MessagesHandler<String>{
 
         return false;
     }
+
+	@Override
+	public String getQueueName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

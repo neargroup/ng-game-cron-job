@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> -->
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>My Profile</title>
+<!-- <link href="css/app.css" rel="stylesheet" type="text/css"> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
+<script>
+$("document").ready(function(){
+var channelid=getUrlParameter("channelid");
+if((navigator.appVersion).includes("FB_IAB") || (navigator.appVersion).includes("MESSENGER") ||(navigator.appVersion).includes("FBAV")){
+	window.location.assign("intent://52.38.95.195:8080/ng/myprofile.html?channelid="+channelid+"#Intent;scheme=http;package=com.android.chrome;end");
+	 webviewClose();
+}else{
+	window.location.assign("index.jsp?channelid="+channelid);
+}
+});
+function webviewClose() {
+	MessengerExtensions.requestCloseBrowser(function success() {
+
+	}, function error(err) {
+
+	});
+	setTimeout(window.close, 1000);
+}
+function getUrlParameter(sParam) {
+	var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+	sURLVariables = sPageURL.split('&'),
+	sParameterName,
+	i;
+
+	for (i = 0; i < sURLVariables.length; i++) {
+		sParameterName = sURLVariables[i].split('=');
+
+		if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? true : sParameterName[1];
+		}
+	}
+};
+</script>
+</head>
+</head>
+<body>
+
+</body>
+</html>

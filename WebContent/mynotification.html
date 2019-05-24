@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Notifications</title>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#ff3d8e" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+	<link rel="shortcut icon" type="image/png" href="images/icon.png"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
+    <style>
+        body {
+            background-color: #F5F5F5;
+        }
+
+            body::-webkit-scrollbar-track {
+                /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+                background-color: #F5F5F5;
+                border-radius: 10px;
+            }
+
+            body::-webkit-scrollbar {
+                width: 6px;
+                background-color: #F5F5F5;
+            }
+
+            body::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background-color: #eeeeee;
+            }
+
+        .red {
+            border-color: red;
+        }
+
+        .green {
+            border-color: green;
+        }
+
+        .rdoControl-any > label {
+            width: 32%;
+        }
+
+        .controls {
+            padding: 2px;
+            float: left;
+            width: 100%;
+            margin-top: 0px;
+            bottom: 83px;
+            margin-bottom: 0px;
+        }
+
+        .avatar-profile-n {
+            width: 64px;
+            height: 64px;
+            border: solid 3px rgba(255, 255, 255, 0.48);
+            border-radius: 10%;
+        }
+
+        .questions {
+            font-size: 14px;
+            margin-top: 0px;
+        }
+        
+        .questions>.question {
+    		margin-bottom: 0px;
+    		padding: 0px;
+    		max-height: 100px;
+                min-height: 70px;
+		}
+		
+            .questions > a > .question {
+                background-color: #fff;
+                margin-bottom: 0px;
+                padding: 0px;
+                border: 0.5px solid #dddddd;
+                -webkit-max-logical-height: 100px;
+                -webkit-min-logical-height: 70px;
+            }
+
+                .questions > a > .question > .que > .head, .questions > a > .question > .head {
+                    padding-bottom: 0px;
+                }
+
+        .img {
+            width: 65px;
+            float: left;
+        }
+
+        .had {
+            margin: 3px 6px 3px 70px;
+        }
+
+        .time {
+            font-size: 12px;
+            /* position: relative; */
+            /* left: 65px; */
+            margin: 0px 3px 3px 70px;
+        }
+        
+        .btn-outline{
+        	font-size: 10px;
+    		padding: 5px 17px;
+        }
+
+.cont-but {
+	float: right;
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 300px;
+}
+
+@media screen and (max-width: 300px) and (min-width: 250px){
+	.cont-but {
+    	margin-left: 180px;
+	}
+}
+@media only screen and (max-width: 350px) and (min-width: 300px){
+	.cont-but {
+    	margin-left: 210px;
+	}
+}
+@media only screen and (max-width: 400px) and (min-width: 350px){
+	.cont-but {
+    	margin-left: 240px;
+	}
+}
+@media only screen and (max-width: 420px) and (min-width: 400px){
+	.cont-but {
+    	margin-left: 270px;
+	}
+}
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 0px;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        xmp {
+            color: #333;
+            display: initial;
+            font-family: 'Circular Std Medium';
+        }
+
+        b {
+            color: #333;
+        }
+
+        a {
+            color: #8f8f8f;
+        }
+
+        .questions > a > .question:hover {
+            text-decoration: none;
+            color: #8f8f8f;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-body">
+        <!-- Place at bottom of page -->
+    </div>
+    <div class="container maincontainer">
+        <!-- <div class="menubar">
+            <div class="action">
+                <button class="btn-outline" id="btn_save"
+                    style="margin-right: -12px;">Save</button>
+            </div>
+        </div> -->
+
+        <div class="controls">
+            <div class="questions" id="noti"></div>
+        </div>
+        <div style="text-align: center;">
+            <img src="" id="loadingnext" />
+        </div>
+        <!-- <button class="btn-outline btn-deacti" id="btndeactivate">Deactivate
+            Account</button>
+         -->
+        <!-- class="deactivate"  -->
+
+    </div>
+    <div class="container deactivate_container hidden">
+        <div class="controls">
+            <div class="questions">
+                <div class="question">
+                    <label class="head">Your account currently deactivated</label>
+                    <button class="btn-outline" id="btnactivate">
+                        Activate
+                        Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-message" class="mdl-js-snackbar mdl-snackbar"
+         style="width: 100%;">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+</body>
+</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX2g336vJpmvGwGERnPsjOh5gvG9sPCJg&libraries=places&language=en"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
+<script src="js/profile.min.js"></script>
+<script type="text/javascript">
+
+    $body = $("body");
+    $(function () {
+        $body.addClass("loading");
+        $.ajax({
+            type: "POST",
+            url: "myNotification",
+            //crossDomain: true,
+            dataType: 'json',
+            data: JSON.stringify({
+                "channelid": getUrlParameter("channelid"),
+            }),
+            cache: false,
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            success: function (data) {
+                $body.removeClass("loading");
+                if (data) {
+                    if ('noti' in data) {
+                        if (data.comm.gender == 'male') {
+                            $('meta[name=theme-color]').attr("content", "#1B9AF3");
+                        } else {
+                            $('meta[name=theme-color]').attr("content", "#fa5194");
+                        }
+                        showdata(data);
+                    } else if ("deactivate" in data) {
+                        $('.deactivate_container').removeClass('hidden');
+                        $('.maincontainer').html('');
+                    } else if ("Grant_Access" in data) {
+                        if (data.Grant_Access === false) {
+                            window.location.replace("bot2.html");
+                        }
+                    } else {
+
+                    }
+                }
+            }
+        });
+    });
+
+    /*  var limit=5;
+     var notload='null';
+     $(window).scroll(function() {
+         /* > -1
+           if($(window).scrollTop() + $(window).height() > $(document).height()-1 && notload=='null') {
+               $('#loadingnext').attr('src', 'images/FhHRx.gif');
+               $.ajax({
+                    type: "POST",
+                    url: "myNotification",
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "tid": 1,
+                        "channelid": getUrlParameter("channelid"),
+                        "limit": limit
+                    }),
+                    cache: false,
+                    contentType: 'application/json',
+                    mimeType: 'application/json',
+                    success: function(data) {
+                        $('#loadingnext').attr('src', '');
+                        if(data.noti!=''){
+                            showdata(data);
+                        }else{
+                            notload='notload';
+                        }
+                    }
+             });
+             limit=limit+10;
+           }
+        }); */
+    function showdata(data) {
+        var chid=data.comm.channelid;
+        for (var i in data.noti) {
+            var src = '';
+            if (data.noti[i].isRealImage == '2') {
+                src = 'https://s3-us-west-2.amazonaws.com/ng-image/ng/thumb/512_512_profile_'; //https://img.neargroup.in/project/forcesize/65x65/profile_
+            } else {
+                src = 'https://s3-us-west-2.amazonaws.com/ng-image/ng/pix/25_profile_'; //https://img.neargroup.in/project/forcesize/65x65/pixelate_3/profile_
+            }
+            if ("channelAuth1" in data.noti[i]) {
+                var err = '';
+                if (data.comm.gender == 'male') {
+                    err = 'this.src=\'images/boy.png\'';
+                } else {
+                    err = 'this.src=\'images/girl.png\'';
+                }
+                
+                $('#noti').append('<a href="https://web.neargroup.me/ng/myprofile.html?channelid=' + data.noti[i].channelAuth1 + '"><div class="question" id="">'
+                    + '<div class="img">'
+                    + '<img src="' + src + data.comm.channelid + '" onerror="' + err + '" class="avatar-profile-n" id="avatar_profile_girl" />'
+                    + '</div>'
+                    + '<div class="had">'
+                    + '<label class="head">' + data.noti[i].mess + '</label>'
+                    + '</div>'
+                    + '<div class="time">'
+                    + '<label class="head">' + data.noti[i].time + '</label>'
+                    + '</div>'
+                    + '</div></a>');
+            } else {
+                var err = '';
+                if (data.noti[i].gender == 'male') {
+                    err = 'this.src=\'images/boy.png\'';
+                } else {
+                    err = 'this.src=\'images/girl.png\'';
+                }
+               
+                var but='';
+                if(data.noti[i].msgType=='like'){
+                	but='<span class="cont-but"><button class="btn-outline" onclick="contactNoti(\''+data.comm.channelAuth2+'\',\''+data.noti[i].channelAuth2+'\',\''+chid+'\',\''+data.noti[i].channelid+'\',\''+data.noti[i].msgType+'\',\''+data.noti[i].name+'\',\''+encodeURI(data.noti[i].msg)+'\',\'\');">Contact</button></span>';
+                }else if(data.noti[i].msgType=='rate_review'){
+                	but='<span class="cont-but"><button class="btn-outline" onclick="contactNoti(\''+data.comm.channelAuth2+'\',\''+data.noti[i].channelAuth2+'\',\''+chid+'\',\''+data.noti[i].channelid+'\',\''+data.noti[i].msgType+'\',\''+data.noti[i].name+'\',\''+encodeURI(data.noti[i].msg)+'\',\''+data.noti[i].rate+'\');">Contact</button></span>';
+                }else if(data.noti[i].msgType=='rate'){
+                	but='<span class="cont-but"><button class="btn-outline" onclick="contactNoti(\''+data.comm.channelAuth2+'\',\''+data.noti[i].channelAuth2+'\',\''+chid+'\',\''+data.noti[i].channelid+'\',\''+data.noti[i].msgType+'\',\''+data.noti[i].name+'\',\'\',\''+data.noti[i].rate+'\');">Contact</button></span>';
+                }else if(data.noti[i].msgType=='chat'){
+                	but='<span class="cont-but"><button class="btn-outline" onclick="contactNoti(\''+data.comm.channelAuth2+'\',\''+data.noti[i].channelAuth2+'\',\''+chid+'\',\''+data.noti[i].channelid+'\',\''+data.noti[i].msgType+'\',\''+data.noti[i].name+'\',\''+data.noti[i].hashtag+'\',\'\');">Contact</button></span>';
+                }else {
+                	but='';
+                }
+                $('#noti').append(but+'<a href="https://web.neargroup.me/ng/myprofile.html?channelid=' + data.noti[i].channelAuth2 + '&channelid2=' + data.comm.channelAuth2 + '&hYFyh=GVhfhH"><div class="question" id="">'
+                    + '<div class="img">'
+                    + '<img src="' + src + data.noti[i].channelid + '" onerror="' + err + '" class="avatar-profile-n" id="avatar_profile_girl" />'
+                    + '</div>'
+                    + '<div class="had">'
+                    + '<label class="head">' + data.noti[i].mess + '</label>'
+                    + '</div>'
+                    + '<div class="time">'
+                    + '<label class="head">' + data.noti[i].time + '</label>'
+                    + '</div>'
+                    + '</div></a>');
+                
+            }
+        }
+        if (data.comm.gender == 'male') {
+            $('.btn-outline').addClass('btn-outline-colorchange');
+        }
+    }
+function contactNoti(chauth1,chauth2,chid1,chid2,msgType,name,msg,rate){
+	console.log(chid1);console.log(chid2);console.log(msgType);console.log(name);console.log(msg);console.log( rate);
+	var jsonObj = {};
+	jsonObj["tid"]=2;
+	jsonObj["chauth1"]=chauth1;
+	jsonObj["chauth2"]=chauth2;
+	jsonObj["chid1"]=chid1;
+	jsonObj["chid2"]=chid2;
+	jsonObj["msgType"]=msgType;
+	jsonObj["name"]=name;
+	jsonObj["msg"]=msg;
+	jsonObj["rate"]=rate;
+	$.ajax({
+        type: "POST",
+        url: "myNotification",
+        //crossDomain: true,
+        dataType: 'json',
+        data: JSON.stringify(jsonObj),
+        cache: false,
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        success: function (data) {
+        	if (data.Grant_Access === true) {
+				var data1 = {
+						message: 'Your message has been sent to this person.',
+						timeout: 3000
+				};
+				showsnackbar(data1.message);
+			} else if (data.Grant_Access === false) {
+				if (data.isAbuse === true) {
+					var data1 = {
+							message: 'Apologies, your request didn\'t go through,<br>as it may contain inappropriate words.',
+							timeout: 2000
+					};
+					showsnackbar(data1.message);
+				}else if (data.isBlocked === true) {
+					var data1 = {
+							message: 'User is busy in chatting with someone else, please try again later',
+							timeout: 2000
+					};
+					showsnackbar(data1.message);
+				} else {
+					var data1 = {
+							message: 'Apologies! you can only send one contact request in 24 hours.<br>Please try after ' + data.mess + ' hour(s).',
+							timeout: 2000
+					};
+					showsnackbar(data1.message);
+				}
+			}
+			$('#contacttextarea').val('');
+			setTimeout(function () { webviewClose(); }, 3000);
+        }
+	});
+}
+</script>

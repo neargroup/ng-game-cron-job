@@ -1,0 +1,310 @@
+@font-face {
+    font-family: 'Circular Std Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Circular Std Book'), url('../fonts/CircularStd-Book.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Circular Std Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Circular Std Medium'), url('../fonts/CircularStd-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Circular Std Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Circular Std Bold'), url('../fonts/CircularStd-Bold.woff') format('woff');
+}
+
+
+body {
+    font-family: 'Circular Std Book';
+    font-size: 14px;
+    overflow-y: hidden !important;
+}
+
+.container {
+    width: 1170px !important;
+}
+
+.maincontainer {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 45px;
+    position: relative;
+}
+
+/* .logo-top {
+    width: 150px;
+    height: 49px;
+} */
+.logo-top {
+    width: 250px;
+    height: 82px;
+}
+.slogan1 {
+    padding-top: 63px;
+    width: 446px;
+    /*height: 104px;*/
+    font-family: Circular Std Book;
+    font-size: 42px;
+    line-height: 1.24;
+    text-align: left;
+    color: #020203;
+}
+
+.slogan2 {
+    padding-top: 25px;
+    width: 399px;
+    opacity: 0.45;
+    font-family: Circular Std Book;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    color: #020203;
+}
+
+.pressrelease {
+    padding-top: 24px;
+    font-family: Circular Std Book;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    color: #020203;
+}
+
+    .pressrelease > span {
+        opacity: 0.45;
+    }
+
+    .pressrelease > a {
+        color: #1b9af3;
+        margin-left: 5px;
+        border-bottom: dotted 0.5px #1b9af3;
+        opacity: 1;
+        padding-bottom: 4px;
+        text-decoration: none;
+    }
+
+.explore {
+    margin-top: 37px;
+    border-radius: 4px;
+    background-color: #1b9af3;
+    box-shadow: 0 10px 14px 0 rgba(27, 154, 243, 0.24);
+    font-family: Circular Std Book;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    color: #ffffff;
+    border: 0px;
+    text-align: center;
+    padding: 13px 25px;
+}
+
+    .explore > img {
+        width: 14px;
+        height: 14px;
+        margin-right: 6px;
+    }
+
+
+.bottomsection {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-top: 66px;
+    position: relative;
+}
+
+    .bottomsection .holder {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        margin: 0px auto;
+        width: 100%;
+    }
+
+.bottom-image1 {
+    /*position: absolute;
+    left: 0px;
+    bottom: 0px;*/
+    width: 100%;
+    height: 100%;
+    /*height: 630px;*/
+}
+
+.chat {
+    /*position: absolute;
+    right: 46px;
+    top: 0px;
+    z-index: 1;*/
+    position: relative;
+    display: inline-block;
+    float: right;
+    height: 400px;
+    width: 650px;
+}
+
+    .chat > .iphone {
+        /*width: 600px;
+        height: 1000px;
+        position: absolute;
+        right: 47px;
+        top: -60px;
+        z-index: 1;*/
+        width: 550px;
+        height: 837px;
+        position: absolute;
+        right: 47px;
+        top: -95px;
+        z-index: 1;
+    }
+
+
+.bubble1 {
+    position: absolute;
+    left: 96px;
+    top: 269px;
+}
+
+.bubble2 {
+    position: absolute;
+    right: 5px;
+    top: 455px;
+    z-index: 0;
+}
+
+.chatwindow {
+    /*position: absolute;
+    right: 83px;
+    top: 143px;
+    width: 346px;
+    height: 610px;
+    z-index: 2;*/
+    position: absolute;
+    right: 82px;
+    top: 95px;
+    width: 311px;
+    height: 546px;
+    z-index: 2;
+}
+
+.section-left {
+    display: inline-block;
+    float: left;
+    clear: both;
+}
+
+.footer {
+    padding: 250px 60px 0px 60px;
+}
+
+.join-us {
+    /*padding-top: 295px;*/
+    position: relative;
+}
+
+    .join-us > img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .join-us > span {
+        font-size: 22px;
+        padding-left: 15px;
+        color: #ffffff;
+    }
+
+    .join-us > .line {
+        position: absolute;
+        left: 138px;
+        bottom: -2px;
+        width: 37px;
+        height: 2px;
+        /* border: solid 1px #ffffff; */
+        background: white;
+    }
+
+.usage-info {
+    padding-top: 60px;
+    display: inline-block;
+    float: left;
+}
+
+    .usage-info.inforight {
+        padding-left: 100px;
+    }
+
+    .usage-info > span {
+        font-size: 24px;
+        color: white;
+    }
+
+    .usage-info > .bolder {
+        display: block;
+        font-size: 42px;
+        font-family: Circular Std Bold;
+        padding-bottom: 25px;
+    }
+
+.logo-bottom {
+    width: 97px;
+    height: 97px;
+    margin-left: 350px;
+    margin-top: 33px;
+}
+
+.bottom-line {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.19);
+    margin-top: 65px;
+}
+
+.copyright {
+    background: #1b9af3;
+}
+
+    .copyright > .inner {
+        padding: 30px 60px;
+    }
+
+        .copyright > .inner > .text {
+            font-size: 16px;
+            text-align: left;
+            color: #ffffff;
+            float: left;
+            display: inline-block;
+            padding-top: 5px;
+        }
+
+        .copyright > .inner > .icons {
+            font-size: 16px;
+            text-align: left;
+            color: #ffffff;
+            float: right;
+            display: inline-block;
+            margin-right: 45px;
+        }
+
+            .copyright > .inner > .icons > a {
+                margin-left: 14px;
+            }
+
+                .copyright > .inner > .icons > a > i {
+                    font-size: 18px;
+                }
+
+
+@media screen and (min-width: 1380px) {
+    .chat > .iphone {
+        top: -72px;
+    }
+
+    .chatwindow {
+        top: 118px;
+    }
+}

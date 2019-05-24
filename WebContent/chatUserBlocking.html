@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat User Blocking</title>
+<meta charset="utf-8" />
+<meta name="theme-color" content="#ff3d8e" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="shortcut icon" type="image/png" href="images/icon.png" />
+<link rel="stylesheet"
+	href="//fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="css/styles.min.css">
+<style>
+.nxtcomm{
+	display: block;
+	width: 100%;
+}
+
+.message div{
+	float: none;
+	display: flow-root;
+	border: .5px solid #fd308b;
+}
+</style>
+</head>
+<body>
+	<div class="modal-body">
+		<!-- Place at bottom of page -->
+	</div>
+	<div class="container maincontainer hidden">
+		<div id="storiesview" class="fullview">
+			<div class="story-section" id="f-story">
+				<div class="line"></div>
+			</div>
+			<div style="text-align: center; float: unset;">
+				<img src="" id="loadingnext" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/profile.min.js"></script>
+<script type="text/javascript">
+var r_t_c = 0;
+var limit = 0;
+var notload = 'null';
+var notpageload = 'null';
+
+$(function () {
+	$body = $("body");
+	$body.addClass("loading");
+	servlet(0);
+	$('.container').removeClass('hidden');
+});
+
+$(window).scroll(function () {
+    /* > -1*/
+    if ($(window).scrollTop() + $(window).height() > $(document).height() - 1 && notload == 'null' && notpageload=='null') {
+    	notpageload='abhinay';
+    	$('#loadingnext').attr('src', 'images/FhHRx.gif');
+        servlet(1);
+    }
+});
+
+function servlet(tid){
+	$.ajax({
+	    type: "POST",
+	    url: "chatUserBlocking",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid":tid,
+	        "limit":limit
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	        $body.removeClass("loading");
+	        $('#loadingnext').attr('src', '');
+	        console.log(data);
+	        if (data.user_chatting != '') {
+	        	limit+=20;
+	        	notpageload='null';
+	        	story(data);
+	        }else{
+	        	notload = 'notload';
+	        }
+	    }
+	});
+}
+
+function story(data) {
+    for (i in data.user_chatting) {
+        $('#f-story').append('<div class="stories" id="rev_top'
+                + r_t_c
+                + '"><div class="intend wrapword"><div class="date">'
+                + data.user_chatting[i].channelid
+                + ' | '
+                + data.user_chatting[i].testi_time
+                + '</div><div class="message" id="advices_text'
+                + r_t_c
+                + '" contenteditable="false"><a href="javascript:void(0);" id="getChat'
+                + r_t_c
+                + '" class="followbutton" onclick="getChat(\''
+                + r_t_c
+                + '\', \''
+                + data.user_chatting[i].chat_link.mid
+                + '\', \''
+                + data.user_chatting[i].chat_link.cid
+                + '\')">Chat</a>'
+                + '</div><div class="nxtcomm">Comments --- </div><div class="nxtcomm">'
+    			+ i
+    			+ '. '
+    			+ data.user_chatting[i].quick_reply
+    			+ '</div><div class="nxtcomm message">'
+    			+ data.user_chatting[i].review
+    			+ '</div></div>');
+	        for (var j in data.user_chatting[i].rate_comment) {
+	        	var k=parseInt(j)+1;
+	        	$('#rev_top'+ r_t_c).append('<div class="nxtcomm">Rates --- </div><div class="nxtcomm">'
+	        			+ k
+	        			+ '. '
+	        			+ data.user_chatting[i].rate_comment[j].rate
+	        			+ '</div>');
+	        }
+	        $('#rev_top'+ r_t_c).append('<span id="suspend1'
+	                + r_t_c
+	                + '"><button class="followbutton" onclick="sendWarm(\''
+	                + r_t_c
+	                + '\', \''
+	                + data.user_chatting[i].id
+	                + '\', \''
+	                + data.user_chatting[i].channelid
+	                + '\', \''
+	                + data.user_chatting[i].toChannelid
+	                + '\', \'1\')">Ban User for 1 hr.</button></span><span id="suspend4'
+	                + r_t_c
+	                + '"><button class="followbutton" onclick="sendWarm(\''
+	                + r_t_c
+	                + '\', \''
+	                + data.user_chatting[i].id
+	                + '\', \''
+	                + data.user_chatting[i].channelid
+	                + '\', \''
+	                + data.user_chatting[i].toChannelid
+	                + '\', \'4\')">Ban User for 4 hr.</button></span><span id="suspend24'
+	                + r_t_c
+	                + '"><button class="followbutton" onclick="sendWarm(\''
+	                + r_t_c
+	                + '\', \''
+	                + data.user_chatting[i].id
+	                + '\', \''
+	                + data.user_chatting[i].channelid
+	                + '\', \''
+	                + data.user_chatting[i].toChannelid
+	                + '\', \'24\')">Ban User for 24 hr.</button></span><span id="suspend30'
+	                + r_t_c
+	                + '"><button class="followbutton" onclick="sendWarm(\''
+	                + r_t_c
+	                + '\', \''
+	                + data.user_chatting[i].id
+	                + '\', \''
+	                + data.user_chatting[i].channelid
+	                + '\', \''
+	                + data.user_chatting[i].toChannelid
+	                + '\', \'30\')">Ban User for 1 month</button></span><span id="remove'
+	                + r_t_c
+	                + '"><button class="followbutton" onclick="removeChat(\''
+	                + r_t_c
+	                + '\', \''
+	                + data.user_chatting[i].id
+	                + '\')">Remove Chat</button></span></div>');
+          r_t_c++;
+    }
+}
+
+function sendWarm(r_t_c, id, cid, tocid, hr){
+	$body = $("body");
+	$body.addClass("loading");
+	$.ajax({
+	    type: "POST",
+	    url: "chatUserBlocking",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid" : 2,
+	        "id" : id,
+	        "cid" : cid,
+	        "tocid" : tocid,
+	        "hr" : hr
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	    	$body.removeClass("loading");
+	        if (data.warning=='send') {
+	        	$('#rev_top'+r_t_c).html('');
+	        }else{
+	        }
+	    }
+	});
+}
+
+function removeChat(r_t_c, id){
+	$('#rev_top'+r_t_c).html('');
+	$.ajax({
+	    type: "POST",
+	    url: "chatUserBlocking",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid" : 3,
+	        "id" : id
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	    }
+	});
+}
+
+function getChat(r_t_c, mid, cid){
+	$body = $("body");
+	$body.addClass("loading");
+	$.ajax({
+	    type: "POST",
+	    url: "chatUserBlocking",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid" : 4,
+	        "mid" : mid,
+	        "cid" : cid
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	    	$body.removeClass("loading");
+	    	$('#getChat'+r_t_c).addClass('hidden');
+	    	if("connection" in data && data.connection=='error'){
+	    		$('#advices_text'+r_t_c).append('maintenance_in_progress');
+			}else if ("data" in data && data.data=='no') {
+				$('#advices_text'+r_t_c).append('no data');
+			}else if ("user" in data) {
+				$('#advices_text'+r_t_c).append('<div id="user">');
+				for (i in data.user) {
+					if ("user1" in data.user[i]) {
+						console.log("user1="+data.user[i].user1.name);
+						$('#advices_text'+r_t_c+' #user').append('<span style="float:right;">'+data.user[i].user1.name+' ('+data.user[i].user1.gender+')<br><a href="'
+								+data.user[i].user1.url+'" target="_blank">view profile</a></span>');
+					} else if ("user2" in data.user[i]) {
+						console.log("user2="+data.user[i].user2.name);
+						$('#advices_text'+r_t_c+' #user').append('<span style="float:left;">'+data.user[i].user2.name+' ('+data.user[i].user2.gender+')<br><a href="'
+								+data.user[i].user2.url+'" target="_blank">view profile</a></span>');
+					}
+				}
+				if ("msg" in data) {
+					for(i in data.msg){
+						if ("msg_right" in data.msg[i]) {
+							$('#advices_text'+r_t_c).append('<div><span style="float:right;" class="mess-right wrapword" id="mess-send'+i+'">'
+											+ data.msg[i].msg_right
+											+ '</span></div>');
+						} else if ("msg_left" in data.msg[i]) {
+							$('#advices_text'+r_t_c).append('<div><span style="float:left;" class="mess-left wrapword" id="mess-send'+i+'">'
+											+ data.msg[i].msg_left
+											+ '</span></div>');
+						}
+					}
+		    	}
+		    	$('#advices_text'+r_t_c).append('<button class="followbutton" onclick="miniChat(\''+r_t_c+'\',\''+mid+'\',\''+cid+'\')">minimize chat</button>');
+			}
+	    	
+	    }
+	});
+}
+
+function miniChat(r_t_c, mid, cid){
+	$('#advices_text'+r_t_c).html('');
+	
+	$('#advices_text'+r_t_c).append('<a href="javascript:void(0);" id="getChat'
+        + r_t_c
+        + '" class="followbutton" onclick="getChat(\''
+        + r_t_c
+        + '\', \''
+        + mid
+        + '\', \''
+        + cid
+        + '\')">Chat</a>');
+}
+</script>

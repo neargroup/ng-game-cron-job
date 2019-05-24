@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- http://localhost:8080/NG/chatFeedback.html?mid=3566504&cid=49d1b3503e664f4da2a166c5db07a90b&rateType=1 -->
+<title>Chat Feedback</title>
+<meta charset="utf-8" />
+<meta name="theme-color" content="#ff3d8e" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="shortcut icon" type="image/png" href="images/icon.png" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="css/styles.min.css">
+<style>
+body {
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-track {
+	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+body::-webkit-scrollbar {
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #eeeeee;
+}
+
+.red {
+	border-color: red;
+}
+
+.green {
+	border-color: green;
+}
+
+.rdoControl-3>label {
+	width: 32%;
+}
+
+.blurimage_text, .dob-text, .country-text {
+	/* color: rgba(0,0,0,.26); */
+	color: #8f8f8f;
+	font-size: 12px;
+	text-align: center;
+	width: 100%;
+	padding-top: 5px;
+	font-weight: 700;
+}
+
+.heightfeetinch {
+	width: 25%;
+	display: inline-block;
+}
+
+.iti-flag {
+	background-image: url("images/flags.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) , only screen and
+		(min--moz-device-pixel-ratio: 2) , only screen and
+		(-o-min-device-pixel-ratio: 2 / 1) , only screen and
+		(min-device-pixel-ratio: 2) , only screen and (min-resolution: 192dpi)
+		, only screen and (min-resolution: 2dppx) {
+	.iti-flag {
+		background-image: url("images/flags@2x.png");
+	}
+}
+
+.image {
+	top: 0px;
+}
+
+.md1__change-but {
+	margin-top: 10px;
+	margin-left: -16px;
+	display: inline-block;
+}
+
+.change-but {
+	padding: 5px 20px;
+	font-size: 13px;
+}
+
+.que {
+	margin-top: 12px;
+}
+
+#country_text {
+	margin-top: 8px;
+}
+
+.controls .mdl-textfield {
+	margin-top: 0px !important;
+}
+</style>
+</head>
+<body>
+	<div class="modal-body">
+		<!-- Place at bottom of page -->
+	</div>
+	<div class="container maincontainer hidden">
+		<div class="menubar">
+			<div class="action">
+				<button class="btn-outline" id="feed_save"
+					style="margin-right: -12px;">Done</button>
+			</div>
+		</div>
+		<div class="controls">
+			<div class="questions">
+				<div class="question" id="main_sec" style="text-align: center;">
+					<label class="head" style="padding-bottom: 0px;"></label>
+				</div>
+				<div class="question" id="rate_sec">
+					<label class="head">Please rate </label>
+					<div class="rdoControl-Circle" id="rdoControl-Circle">
+						<label for="radio1"> <input type="radio" value="" id="radio1" name="rate" chekced /></label>
+						<label for="radio2"> <input type="radio" value="" id="radio2" name="rate" /></label>
+						<label for="radio3"> <input type="radio" value="" id="radio3" name="rate" /></label>
+						<label for="radio4"> <input type="radio" value="" id="radio4" name="rate" /></label>
+						<label for="radio5"> <input type="radio" value="" id="radio5" name="rate" /></label>
+					</div>
+				</div>
+				<div class="question" id="comment_sec">
+					<label class="head"></label>
+					<div class="mdl-textfield mdl-js-textfield">
+						<span class="icon"><i class="material-icons">insert_comment</i></span>
+						<textarea class="mdl-textfield__input" name="comment" id="comment"
+							rows="6" placeholder="Please write your comment"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container deactivate_container hidden">
+		<div class="controls">
+			<div class="questions">
+				<div class="question">
+					<label class="head">Your account is currently deactivated</label>
+					<button class="btn-outline" id="btnactivate">Activate
+						Account</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="lean-overlay" id="overlayContact"></div>
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						onclick="CloseModal();">
+						<i class="material-icons">close</i>
+					</button>
+					<h4 class="modal-title" id="model_title_text"></h4>
+					<h6 class="modal-title modal-text" id="model_t_text"></h6>
+					<button type="button" class="btn btn-default followbutton"
+						id="btnok">OK</button>
+					<button type="button" class="btn btn-default followbutton"
+						id="btncancel">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="toast-message" class="mdl-js-snackbar mdl-snackbar"
+		style="width: 100%;">
+		<div class="mdl-snackbar__text"></div>
+		<button class="mdl-snackbar__action" type="button"></button>
+	</div>
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://connect.facebook.com/en_US/messenger.Extensions.js"></script>
+<script src="js/profile.min.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+	$body = $('body');
+	var profileName='';
+	var togender='';
+	$(function() {
+		$body.addClass("loading");
+		//rateType=0(negative), =1(positive)
+		var rateType=getUrlParameter("rateType");
+		$.ajax({
+			type : "POST",
+			url : "chatFeedback",
+			//crossDomain: true,
+			dataType : 'json',
+			data : JSON.stringify({
+				"mid" : getUrlParameter("mid"),
+				"cid" : getUrlParameter("cid")
+			}),
+			cache : false,
+			contentType : 'application/json',
+			mimeType : 'application/json',
+			success : function(data) {
+				$body.removeClass("loading");
+				 $('.maincontainer').removeClass('hidden');
+				if (data.Grant_Access === true) {
+					if(data.user_gender=='male'){
+						 $('meta[name=theme-color]').attr("content", "#1B9AF3");
+						$('.rdoControl-Circle').addClass('rdoControl-Circle-colorchange');
+						$('.btn-outline').addClass('btn-outline-colorchange');
+					}
+					profileName=data.toprofileName;
+					togender=data.togender;
+					if(rateType==0){
+						$('#main_sec').children('label').html('Sorry to know that you had a bad conversation with '+profileName+'!');
+						$('#radio1').val('Vulgar/Sexual').parent().append('Vulgar/Sexual');
+						$('#radio2').val('Non-Responsive').parent().append('Non-Responsive');
+						$('#radio3').val('Scam/Spam').parent().append('Scam/Spam');
+						$('#radio4').val('Bully').parent().append('Bully');
+						$('#radio5').val('Other').parent().append('Other');
+						$('#comment_sec').children('label').append('More details why you disliked him');
+						/* $('#rdoControl-Circle').append('<label for="radio1"> <input type="radio" value="Vulgar/Sexual" id="radio1" name="rate" chekced />Vulgar/Sexual</label>'
+							+'<label for="radio2"> <input type="radio" value="Non-Responsive" id="radio2" name="rate" chekced />Non-Responsive</label>'
+							+'<label for="radio3"> <input type="radio" value="Scam/Spam" id="radio3" name="rate" /> Scam/Spam</label>'
+							+'<label for="radio4"> <input type="radio" value="Bully" id="radio4" name="rate" /> Bully</label>'
+							+' <label for="radio5"> <input type="radio" value="Other" id="radio5" name="rate" /> Other</label>'); */
+					}else if(rateType==1){
+						$('#main_sec').children('label').html('Glad to know that you had good conversation with '+profileName+'!');
+						$('#radio1').val('Friendly').parent().append('Friendly');
+						$('#radio2').val('Best chat ever').parent().append('Best chat ever');
+						$('#radio3').val('Good-looking').parent().append('Good-looking');
+						$('#radio4').val('Smart').parent().append('Smart');
+						$('#radio5').val('Other').parent().append('Other');
+						$('#comment_sec').children('label').append('More details why you liked him');
+						/* $('#rdoControl-Circle').append('<label for="radio1"> <input type="radio" value="Friendly" id="radio1" name="rate" chekced />Friendly</label>'
+							+'<label for="radio2" class="active"> <input type="radio" value="BestEver" id="radio2" name="rate" chekced />BestEver</label>'
+							+'<label for="radio3"> <input type="radio" value="Beautiful" id="radio3" name="rate" /> Beautiful</label>'
+							+'<label for="radio4"> <input type="radio" value="Intelligent" id="radio4" name="rate" /> Intelligent</label>'
+							+'<label for="radio5"> <input type="radio" value="Other" id="radio5" name="rate" /> Other</label>'); */
+					}
+					
+				} else if (data.Grant_Access === false) {
+						$('#main_sec').html('You have already reported this user once!!!');
+						$('#rate_sec').addClass('hidden');
+						$('#comment_sec').addClass('hidden');
+						$('#feed_save').addClass('hidden');
+				}else{
+					console.log('error');
+				}
+			}
+		});
+	});
+
+	$('#feed_save').click(function() {
+		var rateType=getUrlParameter("rateType");
+		if($('input[name="rate"]:checked').length <= 0){
+			$('input[name="rate"]').focus();
+			$('#rate_sec').addClass('error');
+			var data1 = {
+					message : 'You haven\'t selected any option yet, please select any one of them',
+					timeout : 3000
+			};
+			showsnackbar(data1.message);
+			setTimeout(function () {
+				$('#rate_sec').removeClass('error');
+			}, 5000);
+		}else{
+			var rate = $('input[name="rate"]:checked').val();
+			var comment = $('#comment').val();
+			var comlength = comment.split('').length;
+			if (comlength < 701) {
+				$body.addClass("loading");
+				$.ajax({
+					type : "POST",
+					url : "chatFeedback",
+					//crossDomain: true,
+					dataType : 'json',
+					data : JSON.stringify({
+						"rateType" : rateType,
+						"mid" : getUrlParameter("mid"),
+						"cid" : getUrlParameter("cid"),
+						"rate" : rate,
+						"comment" : comment
+					}),
+					cache : false,
+					contentType : 'application/json',
+					mimeType : 'application/json',
+					success : function(data) {
+						$body.removeClass("loading");
+						var he_she='';
+						if(togender=='male'){
+							he_she='he';
+						}else{
+							he_she='she';
+						}
+						if (data.Grant_Access === true) {
+							if(rateType==0){
+								var data1 = {
+									message : 'Thanks for your review!<br>I\'ll scan your chat with him to check his violations. 🔎<br>You\'ll be notified of any action against '+profileName+'. 😇',
+									timeout : 3000
+								};
+								showsnackbar(data1.message);
+							}else if(rateType==1){
+								var data1 = {
+										message : 'Thanks for sharing!<br>Now others would also know how nice '+he_she+' is :)',
+										timeout : 3000
+									};
+								showsnackbar(data1.message);
+							}
+							webviewClose();
+						} else if (data.Grant_Access === false) {
+								var data1 = {
+									message : 'Apologies! you have written an inappropriate comment. Please, try again!!!',
+									timeout : 3000
+								};
+								showsnackbar(data1.message);
+						} else {
+							console.log("qqqqqqqqqqq");
+						}
+					}
+				});
+			} else {
+				var data1 = {
+					message : 'You can enter maximum 700 characters.',
+					timeout : 3000
+				};
+				showsnackbar(data1.message);
+			}
+		}
+	});
+	$(".rdoControl-Circle input[type=radio]").click(function() {
+	    $(this).closest(".rdoControl-Circle").find("label").removeClass("active");
+	    $(this).parent().addClass("active");
+	});
+</script>

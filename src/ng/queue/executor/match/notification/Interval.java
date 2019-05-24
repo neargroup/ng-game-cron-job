@@ -1,10 +1,7 @@
 package ng.queue.executor.match.notification;
 
 public enum Interval {
-    BOOTSTRAP(15, 5L, 5),
-    ONE(60, 10L, 30),
-    TWF(24 * 60, 21L, 12 * 60),
-    SEV(72 * 60, 21L, 48 * 60);
+    BOOTSTRAP(15, 5L, 5);
 
     private final int duration;
     private final Long count;

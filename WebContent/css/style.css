@@ -1,0 +1,54 @@
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: initial;
+}
+
+th {
+	border: 1px solid #fff;
+	background-color: #4CAF50;
+	color: white;
+	text-align: left;
+}
+
+td {
+	border: 1px solid #fff;
+	text-align: left;
+}
+
+#sr {
+	text-align: center;
+	width: 10%;
+	font-size: small;
+	font-weight: 600;
+}
+.grove {
+    display: -webkit-inline-box;
+    margin-right: 106px;
+}
+.butt{
+	width: 200px;
+}
+.galaxy, .gardian {
+    margin-right: 5px;
+}
+.galaxy{
+	color: #004080;
+}
+.gardian{
+	color: #400000;
+}
+tr:nth-child(odd) {
+	background-color: #f2f2f2;
+	height: 30px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+	height: 25px;
+}
+
+@media screen and (max-width: 768px) {
+	
+}

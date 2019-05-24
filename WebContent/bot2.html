@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>NearGroup</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
+<style>
+body{
+	background-color: #ffbdbd;
+	color: #ffffff;
+	text-align: justify;
+    text-justify: inter-word;
+    line-height: 180%;
+}
+img.main{
+ 	width: 100%;
+    height: auto;
+}
+p{
+	width: 92%;
+	margin: 10px;
+	font-size: 14px;
+}
+
+a{
+	 border-radius: 50%;
+	 color: #ffffff;
+}
+ 
+.radius{
+	display: flex;
+	margin: 15px;
+}
+
+.fbmess{
+	text-decoration: none;
+	background-color: #0080FE !important;
+	text-align: center;
+    color: #fff;
+    border: 2px;
+    padding: 10px 0;
+    border-radius: 15px;
+    width: 40%;
+}
+
+.whatsapp{
+    text-decoration: none;
+    background-color: #25D366 !important;
+    text-align: center;
+    color: #fff;
+    border: 2px;
+    padding: 10px 40px;
+    border-radius: 15px;
+    width: 40%;
+}
+
+.message{
+    text-decoration: none;
+    background-color: #16C1EA!important;
+    text-align: center;
+    color: #fff;
+    border: 2px;
+    padding: 10px 40px;
+    border-radius: 15px;
+    width: 40%;
+}
+
+img.mess{
+	height: 25px;
+	margin: 0 5px 0 0;
+}
+
+img.size{
+	height: 80px;
+	margin: 0 50px 0 0;
+}
+
+.fbmess:hover, .share:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+
+
+@media ( max-width :786px) {
+	.radius{
+		text-align: center;
+	}
+	.fbmess{
+		width: 100%;
+	}
+	
+	.share{
+		width: 100%;
+	}
+	img.size{
+		height: 80px;
+		margin: 15px 45px 0 0;
+	}
+
+}
+</style>
+</head>
+<body>
+<div>
+<img class="main" src="images/ng-chat-ext.jpg"/>
+</div>
+<div>
+<p>Use NearGroup to chat anonymously with people nearby. Make friends, talk about interests and read stories all within Facebook Messenger.</p>
+</div>
+<div class="radius">
+<a href="https://m.me/neargroup" class="fbmess"><img src="images/mess.png" class="mess"/>Make new friends via NearGroup</a>
+</div>
+<div class="radius">
+<a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><img src="images/whatsapp.png" class="size"/></a>
+
+<a href="smsto:?body=123"><img src="images/message.png" class="size"/></a>
+
+<a href="fb-messenger://share/?link=123&app_id=132103753883015"><img src="images/fb_mess-icon.png" class="size"/></a>
+</div>
+</body>
+</html>
+
+
+

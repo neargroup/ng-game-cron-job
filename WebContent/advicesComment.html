@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advices Comment</title>
+<meta charset="utf-8" />
+<meta name="theme-color" content="#ff3d8e" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="shortcut icon" type="image/png" href="images/icon.png" />
+<link rel="stylesheet"
+	href="//fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="css/styles.min.css">
+<style>
+.maincontainer {
+	margin-top: 10px;
+}
+
+.stry {
+	margin-left: 10px;
+}
+
+.img {
+	width: 65px;
+}
+
+.profile-name {
+	position: absolute;
+    margin-left: 75px;
+    margin-top: 16px;
+    display: block;
+    width: 50%;
+}
+
+.fb-like {
+	margin-top: 10px;
+    margin-left: 5px;
+}
+.stories .date {
+	margin-left: 75px;
+}
+
+.story-section {
+	margin-top: -35px;
+}
+
+.stories {
+    border-bottom: none;
+}
+
+.reviews .message, .stories .message {
+    padding-right: 10px;
+}
+</style>
+</head>
+
+<body>
+	<div class="modal-body">
+		<!-- Place at bottom of page -->
+	</div>
+	<div class="container maincontainer hidden">
+		<div id="storiesview" class="fullview">
+			<div class="stry">
+			<div class="img">
+				<img src="" onerror="" class="avatar-profile-n" id="avatar_profile" />
+			</div>
+			<div class="profile-name" id="ung_top"></div>
+			<div class="story-section" id="f-story"></div>
+			 
+			</div>
+			<div class="line"></div>
+			<div class="fb-like" data-href="https://www.facebook.com/neargroup/" data-layout="standard" 
+			data-action="like" data-size="small" data-show-faces="true" data-share="true" id="fb_like" data-width="225px"></div>
+			<div class="fb-comments" data-href="advicesComment.html?aid="
+				data-mobile="Auto-detected" data-numposts="5" data-width="320px" id="fb_comments"></div>
+			<div id="fb-root"></div>
+			<div style="text-align: center; float: unset;">
+				<img src="" id="loadingnext" />
+			</div>
+		</div>
+	</div>
+	<div class="container deactivate_container hidden">
+		<div class="controls">
+			<div class="questions">
+				<div class="question">
+					<label class="head">Your account currently deactivated</label>
+					<button class="btn-outline" id="btnactivate">Activate
+						Account</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
+<script src="js/profile.min.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+var r_t_c = 0;
+
+$(function () {
+	var w = screen.width;
+	var ml = '5px';
+	var ls = '225px';
+	if(w<321){
+		w='320px';
+		ml = '0px';
+		ls = '225px';
+	}else if(w<350){
+		w='330px';
+		ml = '5px';
+		ls = '290px';
+	}else if(w<400){
+		w='350px';
+		ml = '10px';
+		ls = '310px';
+	}else if(w<420){
+		w='375px';
+		ml = '10px';
+		ls = '330px';
+	}else{
+		w='400px';
+		ml = '10px';
+		ls = '350px';
+	}
+	$('#fb_like').attr('data-width',ls);
+	$('#fb_comments').attr('data-href', 'advicesComment.html?aid='+getUrlParameter("aid")).attr('data-width',w).css("margin-left", ml);
+	$body = $("body");
+	$body.addClass("loading");
+	servlet(0);
+	$('.maincontainer').removeClass('hidden');
+});
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=132103753883015';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function servlet(tid){
+	$.ajax({
+	    type: "POST",
+	    url: "advicesComment",
+	    dataType: 'json',
+	    data: JSON.stringify({
+	        "tid":tid,
+	        "aid" : getUrlParameter("aid")
+	    }),
+	    cache: false,
+	    contentType: 'application/json',
+	    mimeType: 'application/json',
+	    success: function (data) {
+	        $body.removeClass("loading");
+	        $('#loadingnext').attr('src', '');
+	        if (data.user_advices != '') {
+	        	story(data);
+	        }else{
+	        	notload = 'notload';
+	        }
+	    }
+	});
+}
+
+function story(data) {
+	if(data.user_advices[0].advices.isDeactivate=='0'){
+    for (i in data.user_advices) {
+        var advice_text = data.user_advices[i].advices.advices_text;
+        var text = '';
+        if (data.user_advices[i].advices.hashtag == '#YouTube') {
+            var advice = (data.user_advices[i].advices.advices_text).split("$$$");
+            advice_text = advice[0];
+            for (j = 0; j < advice.length; j++) {
+                if (j != 0) {
+                    text += '$$$' + advice[j];
+                }
+            }
+        }
+        var src = '';
+        if (data.user_advices[i].advices.isRealImage == '2') {
+            src = 'https://s3-us-west-2.amazonaws.com/ng-image/ng/thumb/512_512_profile_'; //https://img.neargroup.in/project/forcesize/65x65/profile_
+        } else {
+            src = 'https://s3-us-west-2.amazonaws.com/ng-image/ng/pix/25_profile_'; //https://img.neargroup.in/project/forcesize/65x65/pixelate_3/profile_
+        }
+        var err = '';
+        if (data.user_advices[i].advices.gender == 'male') {
+            err = 'this.src=\'images/boy.png\'';
+        } else {
+            err = 'this.src=\'images/girl.png\'';
+        }
+        $('#ung_top').html(data.user_advices[i].advices.name);
+        $('#avatar_profile').attr('src',src + data.user_advices[i].advices.image_name).attr('onerror', err);
+        $('#f-story').append('<div class="stories" id="rev_top'
+                + r_t_c
+                + '"><input type="hidden" name="youtube'
+                + r_t_c
+                + '" id="youtube'
+                + r_t_c
+                + '"><div class="intend wrapword"><div class="date">'
+                + data.user_advices[i].advices.hashtag
+                + ' | '
+                + data.user_advices[i].advices.advices_times_ago
+                + ' ago</div><div class="message" id="advices_text'
+                + r_t_c
+                + '" contenteditable="false">'
+                + advice_text
+                + '</div><div class="social-icons-small"><div class="tooltip" id="a_view'
+                + r_t_c
+                + '"><i class="material-icons">remove_red_eye</i><span>'
+                + data.user_advices[i].advices.advices_view
+                + '</span><span class="tooltiptext">View Count</span></div><div class="tooltip" id="a_like'
+                + r_t_c
+                + '"><i class="material-icons">favorite</i><span>'
+                + data.user_advices[i].advices.advices_wow
+                + '</span><span class="tooltiptext">Like Count</span></div><div class="tooltip" id="a_wow'
+                + r_t_c
+                + '"><i class="material-icons">thumb_down</i><span>'
+                + data.user_advices[i].advices.advices_angry
+                + '</span><span class="tooltiptext">Dislike Count</span></div></div></div></div>');
+          r_t_c++;
+    }
+	}else{
+		$('.maincontainer').addClass('hidden');
+		$('.deactivate_container').removeClass('hidden');
+	}
+}
+</script>
