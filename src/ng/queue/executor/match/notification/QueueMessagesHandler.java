@@ -74,7 +74,6 @@ public class QueueMessagesHandler implements MessagesHandler<String>{
 
         try {
             boolean yes = isUserChatting(matchIds[0]);
-            System.out.println("yes : "+ yes);
 
             if (yes) {
                 long lastConversationTimestamp = 0;
@@ -84,17 +83,13 @@ public class QueueMessagesHandler implements MessagesHandler<String>{
                 } catch (NumberFormatException ignored) {
                 }
                 
-                System.out.println("lastConversationTimestamp : "+lastConversationTimestamp);
-
                 long threshold = System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(currentStage.getThreshold());
 
-                System.out.println("threshold : "+threshold);
                 if (lastConversationTimestamp < threshold) {
                     String body = doesUserConverseEnough(currentStage, matchIds[0]) ? "yes" : "noo";
 
                     body = matchIds[0] + "_" + currentStage.toString() + "_" + body;
                     
-                    System.out.println("body : "+body);
                     httpClient.preparePost(this.endpoint)
                             .setBody(body)
                             .execute(new CustomAsyncHandler());
@@ -104,14 +99,12 @@ public class QueueMessagesHandler implements MessagesHandler<String>{
                 }
 
             } else {
-            	System.out.println("else no");
                 redisClient.getAtomicLong(MATCH + matchIds[0]).delete();
             }
         } catch (NullPointerException | InterruptedException e) {
             System.exit(0);
         }
 
-        System.out.println("Message : "+message);
         return message;
     }
 
