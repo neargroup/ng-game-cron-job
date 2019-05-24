@@ -34,7 +34,6 @@ public class MatchUserCronExeAPI extends HttpServlet {
 		String result = exe.matchUserNotiExe();
 
 		response.getWriter().append("'result' : '"+result+"'");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 
