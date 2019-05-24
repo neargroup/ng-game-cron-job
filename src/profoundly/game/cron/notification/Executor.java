@@ -1,5 +1,6 @@
 package profoundly.game.cron.notification;
 
+import org.apache.commons.lang.StringUtils;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
 import org.redisson.api.RDeque;
@@ -21,9 +22,14 @@ public class Executor {
 
 					/*get user data from redis queue*/
 					String result1 = (String)r.pollFirst();
-					httpClient.preparePost(endpoint)
-					.setBody(result1)
-					.execute(new CustomAsyncHandler());
+
+					if(result1 !=null && StringUtils.isNotBlank(result1)) {
+						
+						httpClient.preparePost(endpoint)
+						.setBody(result1)
+						.execute(new CustomAsyncHandler());
+					
+					} 
 
 				} catch (Exception e) {
 					 System.exit(0);

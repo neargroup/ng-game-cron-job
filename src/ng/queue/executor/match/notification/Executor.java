@@ -2,6 +2,7 @@ package ng.queue.executor.match.notification;
 
 import redission.cron.main.RedissonCronProvider;
 
+import org.apache.commons.lang.StringUtils;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
 import org.redisson.api.RDeque;
@@ -21,8 +22,14 @@ public class Executor {
             RDeque<String> r = RedissonCronProvider.getRedissonClient().getDeque(QUEUE_NAME);
             try {
                 while (true) {
-                	String result1 = (String)r.pollFirst();
-                	queueMessagesHandler.process(result1);
+                	try {
+                		String result1 = (String)r.pollFirst();
+                		if(result1 !=null && StringUtils.isNotBlank(result1)) {
+                			queueMessagesHandler.process(result1);
+                		}
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
                 	
                 }
             } catch (Exception ex) {
