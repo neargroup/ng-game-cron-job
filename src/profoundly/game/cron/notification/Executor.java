@@ -5,7 +5,6 @@ import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
 import org.redisson.api.RDeque;
 
-import ng.queue.executor.match.notification.CustomAsyncHandler;
 import redission.cron.main.RedissonCronProvider;
 
 public class Executor {
