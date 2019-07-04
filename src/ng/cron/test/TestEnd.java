@@ -12,7 +12,7 @@ import org.apache.commons.io.IOUtils;
 /**
  * Servlet implementation class TestEnd
  */
-@WebServlet("/TestEnd")
+@WebServlet("/TestEnd2")
 public class TestEnd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
