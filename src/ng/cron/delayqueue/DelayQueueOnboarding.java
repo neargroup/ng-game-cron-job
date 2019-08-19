@@ -36,6 +36,7 @@ public class DelayQueueOnboarding extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String body=IOUtils.toString(request.getInputStream(),"UTF8");
+		System.out.println("body : "+body);
 		String result = "";
 
 		try {
@@ -56,6 +57,8 @@ public class DelayQueueOnboarding extends HttpServlet {
 
 					if (cronData.getTimeUnit().equals("SECONDS") || cronData.getTimeUnit().equals("MINUTES") || cronData.getTimeUnit().equals("HOURS")) {
 						result = "Success";
+						
+						System.out.println( "Cron Data : " + cronData.getData());
 
 						if(cronData.getTimeUnit().equals("SECONDS")) {
 							userActivity.addDelayQueueToRedis(cronData.getDelayTime(), TimeUnit.SECONDS, cronData.getData(), cronData.getQueueName());
@@ -75,6 +78,7 @@ public class DelayQueueOnboarding extends HttpServlet {
 			}
 		} catch (Exception e) {
 			result = "Invalid Body";
+			e.printStackTrace();
 		}
 		response.getWriter().append("'result' : '"+result+"'");
 

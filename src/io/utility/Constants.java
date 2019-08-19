@@ -13,40 +13,18 @@ public class Constants {
 	        public static final String DB_URL = "jdbc:mysql://m1.c40vtcybbb0p.us-west-2.rds.amazonaws.com:1893/ng"; //NEW
 	        public static final String USER ="iuwesas";
 	        public static final String PASS ="jnsk(bnji&ji^frbn";
-//	        public static final String USER_GAME ="pcbmjkulhhcGAME";
-//	        public static final String PASS_GAME ="jnsk(bnji&ji^frbnFBGAME";
-
-	//
-//	        public static final String DB_URL = "jdbc:mysql://testing.c40vtcybbb0p.us-west-2.rds.amazonaws.com:1893/ng"; //NEW
-//	        public static final String USER = "rdsrht";
-//	        public static final String PASS = "rhtgupta";
-//	        public static final String USER_GAME ="rdsrht";
-//	      public static final String PASS_GAME ="rhtgupta";
-//	        public static final String DB_URL_SLAVE = "jdbc:mariadb:replication://testing.c40vtcybbb0p.us-west-2.rds.amazonaws.com:1893,testing.c40vtcybbb0p.us-west-2.rds.amazonaws.com:3306/ng";//NEW
-//	        public static final String DB_URL_SLAVE_ONLY = "jdbc:mysql://testing.c40vtcybbb0p.us-west-2.rds.amazonaws.com:1893/ng";
-
-//	            	public static final String DB_URL = "jdbc:mysql://localhost:3306/ng";
-//					public static final String DB_URL_SLAVE = "jdbc:mysql://localhost:3306/ng";
-//					public static final String USER = "root";
-//					public static final String PASS = "tiger";
-//					public static final String DB_URL_SLAVE_ONLY = "jdbc:mysql://localhost:3306/ng";
-
-//					public static final String DB_URL = "jdbc:mysql://localhost:3307/ng";
-	        //			public static final String DB_URL_SLAVE = "jdbc:mysql://localhost:3307/ng";
-	        //		public static final String USER = "root";
-//					public static final String PASS = "rht";
-//					public static final String DB_URL_SLAVE_ONLY = "jdbc:mysql://localhost:3307/ng";
 
 //	        public static final String REDIS_IP_CHAT_NOW = "redis://ec2-54-71-99-52.us-west-2.compute.amazonaws.com";  //testing chat now
 //	        public static final String DEFAULT_PORT_CHAT_NOW = "6379";  //testing chat now
 	    public static final String REDIS_IP_CHAT_NOW="redis://ng-pro.e2ytak.0001.usw2.cache.amazonaws.com"; //live chat now
 	        public static final String DEFAULT_PORT_CHAT_NOW = "3306"; //live chat now
 
-	       public static final String REDIS_CRON_IP="redis://ng-cron.e2ytak.0001.usw2.cache.amazonaws.com"; //live cron
-	       public static final String REDIS_CRON_PORT="6379"; //live cron
+//	       public static final String REDIS_CRON_IP="redis://ng-cron.e2ytak.0001.usw2.cache.amazonaws.com"; //live cron
+//	       public static final String REDIS_CRON_PORT="6379"; //live cron
 
-//	        public static final String REDIS_CRON_IP = "redis://ec2-54-71-99-52.us-west-2.compute.amazonaws.com"; //local cron
-//	        public static final String REDIS_CRON_PORT = "6379"; //local cron
+	        public static final String REDIS_CRON_IP = "redis://ec2-54-71-99-52.us-west-2.compute.amazonaws.com"; //local cron
+//	        public static final String REDIS_CRON_IP = "redis://127.0.0.1"; //local cron
+	        public static final String REDIS_CRON_PORT = "6379"; //local cron
 
 //			public static final String REDIS_GET_STORY_IP = "redis://ec2-54-71-99-52.us-west-2.compute.amazonaws.com"; //local story
 //	        public static final String REDIS_GET_STORY_IP2 = "ec2-54-71-99-52.us-west-2.compute.amazonaws.com"; //local story
@@ -67,7 +45,7 @@ public class Constants {
 //	        public static final String REDIS_BUCKET_STORY_PORT = "6379"; //live story
 
 	        public static boolean isLocal = false;
-	        public static boolean isLog = false;
+	        public static boolean isLog = true;
 	        public static boolean isCluster = true;
 
 

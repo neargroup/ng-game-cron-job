@@ -1,4 +1,4 @@
-package send.sms.cron.data;
+package ng.bot.cron.onboarding;
 
 import org.apache.commons.lang.StringUtils;
 import org.asynchttpclient.AsyncHttpClient;
@@ -11,12 +11,12 @@ public class Executor {
 	private static AsyncHttpClient httpClient = Dsl.asyncHttpClient();
 
 	public String gameNotiExe() {
-		String endpoint = "https://feed.profoundly.me/send_sms_delay_queue"; //live url
-//		String endpoint = "https://9fb813c8.ngrok.io/send_sms_delay_queue"; //testing url
-
+//		String endpoint = "https://web.neargroup.me/ng/gameUserReminderNoti"; //live url
+		String endpoint = "https://bot.profoundly.me/onboardingcronjob"; //testing url
+		System.out.println("result1 start");
 
 		new Thread(() -> {
-			RDeque<String> r = RedissonCronProvider.getRedissonClient().getDeque("send_sms_delay_queue");
+			RDeque<String> r = RedissonCronProvider.getRedissonClient().getDeque("new_onboarding_queue");
 			while (true){
 				try {
 
@@ -24,6 +24,7 @@ public class Executor {
 					String result1 = (String)r.pollFirst();
 
 					if(result1 !=null && StringUtils.isNotBlank(result1)) {
+						System.out.println("result1 : "+result1);
 						
 						httpClient.preparePost(endpoint)
 						.setBody(result1)
