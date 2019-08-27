@@ -12,7 +12,7 @@ public class Executor {
 
 	public String gameNotiExe() {
 //		String endpoint = "https://web.neargroup.me/ng/gameUserReminderNoti"; //live url
-		String endpoint = "https://bot.profoundly.me/chatnoweventcronjob"; //testing url
+		String endpoint = "https://botcron.profoundly.me/chatnoweventcronjob"; //testing url
 
 		new Thread(() -> {
 			RDeque<String> r = RedissonCronProvider.getRedissonClient().getDeque("auto_disconnect");

@@ -27,7 +27,7 @@ public class WebHook {
 //    private static final String WEBHOOK_URL = "https://test.neargroup.me/ng4/WebhookCRC";
 
     private static final String ENV = "ngprod"; //Live
-    private static final String WEBHOOK_URL = "https://alfa.neargroup.me/ng/WebhookCRC";
+    private static final String WEBHOOK_URL = "https://akshay.neargroup.me/ng-game-cron-job/WebhookCRC";
     private static final String VERSION = "1.1";
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
     private static final String ALL_ACCOUNT_ACTIVITIES = "/account_activity/all/";
@@ -52,8 +52,8 @@ public class WebHook {
     
     
 
-    /*public static void main(String[] args) {
-                deleteWebhook("1060506131196456960");
+    public static void main(String[] args) {
+//                deleteWebhook("1093805528868888576");
 
         addWebHook(WEBHOOK_URL);
     //           getSubscriptionCount();
@@ -65,7 +65,7 @@ public class WebHook {
         
 
         // Execute and get the response
-    }*/
+    }
 
     private static void fetchWebhookConfig() {
         HttpGet httppost =

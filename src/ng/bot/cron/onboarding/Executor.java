@@ -12,7 +12,7 @@ public class Executor {
 
 	public String gameNotiExe() {
 //		String endpoint = "https://web.neargroup.me/ng/gameUserReminderNoti"; //live url
-		String endpoint = "https://bot.profoundly.me/onboardingcronjob"; //testing url
+		String endpoint = "https://botcron.profoundly.me/onboardingcronjob"; //testing url
 		System.out.println("result1 start");
 
 		new Thread(() -> {
