@@ -11,8 +11,7 @@ public class Executor {
 	private static AsyncHttpClient httpClient = Dsl.asyncHttpClient();
 
 	public String gameNotiExe() {
-//		String endpoint = "https://web.neargroup.me/ng/gameUserReminderNoti"; //live url
-		String endpoint = "http://ng-app.us-west-2.elasticbeanstalk.com/queue_notification"; //testing url
+		String endpoint = "https://ngapp.profoundly.me/queue_notification"; //Live url
 		System.out.println("result1 app start: ");
 
 		new Thread(() -> {
@@ -25,7 +24,7 @@ public class Executor {
 
 					if(result1 !=null && StringUtils.isNotBlank(result1)) {
 						
-						System.out.println("result1 app : "+ result1);
+//						System.out.println("result1 app : "+ result1);
 						
 						httpClient.preparePost(endpoint)
 						.setBody(result1)

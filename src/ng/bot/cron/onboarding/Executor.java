@@ -11,8 +11,9 @@ public class Executor {
 	private static AsyncHttpClient httpClient = Dsl.asyncHttpClient();
 
 	public String gameNotiExe() {
-//		String endpoint = "https://web.neargroup.me/ng/gameUserReminderNoti"; //live url
-		String endpoint = "https://botcron.profoundly.me/onboardingcronjob"; //testing url
+		String endpoint = "https://botcron.profoundly.me/onboardingcronjob"; //live url
+//		String endpoint = "https://66ee7e8e.ngrok.io/onboardingcronjob"; //testing url
+
 		System.out.println("result1 start");
 
 		new Thread(() -> {

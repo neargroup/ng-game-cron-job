@@ -18,7 +18,7 @@ public class Constants {
 //	        public static final String DEFAULT_PORT_CHAT_NOW = "6379";  //testing chat now
 	    public static final String REDIS_IP_CHAT_NOW="redis://ng-pro.e2ytak.0001.usw2.cache.amazonaws.com"; //live chat now
 	        public static final String DEFAULT_PORT_CHAT_NOW = "3306"; //live chat now
-
+//
 	       public static final String REDIS_CRON_IP="redis://ng-cron.e2ytak.0001.usw2.cache.amazonaws.com"; //live cron
 	       public static final String REDIS_CRON_PORT="6379"; //live cron
 
