@@ -11,8 +11,8 @@ public class Executor {
 	private static AsyncHttpClient httpClient = Dsl.asyncHttpClient();
 
 	public String gameNotiExe() {
-//		String endpoint = "https://ngapp.profoundly.me/queue_regular_notification"; //live url
-		String endpoint = "http://ng-app.us-west-2.elasticbeanstalk.com/queue_regular_notification"; //Testing url
+		String endpoint = "https://ngapp.profoundly.me/queue_regular_notification"; //live url
+//		String endpoint = "http://ng-app.us-west-2.elasticbeanstalk.com/queue_regular_notification"; //Testing url
 
 		System.out.println("result1 reguler start: ");
 
