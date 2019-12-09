@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RQueue;
 
+import redission.cron.main.GameRedissonCronProvider;
 import redission.cron.main.RedissonCronProvider;
 
 public class UserActivity {
@@ -18,6 +19,17 @@ public class UserActivity {
 		try {
 			RQueue<Object> queue = RedissonCronProvider.getRedissonClient().getQueue(queueName);
 			RDelayedQueue<Object> delayedQueue = RedissonCronProvider.getRedissonClient().getDelayedQueue(queue);
+			delayedQueue.offerAsync(jsonData, time, timeUnit);
+			return jsonData;
+		} catch (Exception e) {
+			return "";
+		}
+	}
+	
+	public String addGameDelayQueueToRedis(long time,TimeUnit timeUnit, String jsonData, String queueName) {
+		try {
+			RQueue<Object> queue = GameRedissonCronProvider.getRedissonClient().getQueue(queueName);
+			RDelayedQueue<Object> delayedQueue = GameRedissonCronProvider.getRedissonClient().getDelayedQueue(queue);
 			delayedQueue.offerAsync(jsonData, time, timeUnit);
 			return jsonData;
 		} catch (Exception e) {

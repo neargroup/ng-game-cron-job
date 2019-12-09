@@ -21,6 +21,9 @@ public class Constants {
 //
 	       public static final String REDIS_CRON_IP="redis://ng-cron.e2ytak.0001.usw2.cache.amazonaws.com"; //live cron
 	       public static final String REDIS_CRON_PORT="6379"; //live cron
+	       
+	       public static final String REDIS_GAME_CRON_IP="redis://game-cron.e2ytak.0001.usw2.cache.amazonaws.com"; //live game cron
+	       public static final String REDIS_GAME_CRON_PORT="6379"; //live game cron
 
 //	        public static final String REDIS_CRON_IP = "redis://ec2-54-71-99-52.us-west-2.compute.amazonaws.com"; //local cron
 //	        public static final String REDIS_CRON_IP = "redis://127.0.0.1"; //local cron
