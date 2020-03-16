@@ -11,10 +11,10 @@ public class Executor {
 	private static AsyncHttpClient httpClient = Dsl.asyncHttpClient();
 
 	public String gameNotiExe() {
-		String endpoint = "https://botcron.profoundly.me/chatnoweventcronjob"; //live url
+		String endpoint = "https://botcron.profoundly.me/fb_user_last_notification"; //live url
 
 		new Thread(() -> {
-			RDeque<String> r = GameRedissonCronProvider.getRedissonClient().getDeque("auto_disconnect");
+			RDeque<String> r = GameRedissonCronProvider.getRedissonClient().getDeque("LastNotificationFB");
 			while (true){
 				try {
 

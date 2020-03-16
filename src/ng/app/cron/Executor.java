@@ -12,6 +12,8 @@ public class Executor {
 
 	public String gameNotiExe() {
 		String endpoint = "https://ngapp.profoundly.me/queue_notification"; //Live url
+//		String endpoint = "http://ng-app.us-west-2.elasticbeanstalk.com/queue_notification"; //Test url
+
 		System.out.println("result1 app start: ");
 
 		new Thread(() -> {
