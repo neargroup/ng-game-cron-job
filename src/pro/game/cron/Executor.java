@@ -12,6 +12,8 @@ public class Executor {
 
 	public String gameNotiExe() {
 		String endpoint = "https://botcron.profoundly.me/fb_user_last_notification"; //live url
+//		String endpoint = "https://bottest.profoundly.me/fb_user_last_notification"; //Testing URL url
+
 
 		new Thread(() -> {
 			RDeque<String> r = GameRedissonCronProvider.getRedissonClient().getDeque("LastNotificationFB");
